@@ -11,10 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728230619) do
+ActiveRecord::Schema.define(version: 20150729032432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hunts", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "submissions", force: :cascade do |t|
     t.boolean  "correct",                 default: false
@@ -26,4 +30,16 @@ ActiveRecord::Schema.define(version: 20150728230619) do
     t.datetime "updated_at",                              null: false
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string  "name"
+    t.integer "hunt_id"
+    t.boolean "active",          default: true
+    t.string  "slug"
+    t.string  "phone_number"
+    t.integer "found_locations", default: 0
+  end
+
+  add_index "teams", ["hunt_id"], name: "index_teams_on_hunt_id", using: :btree
+
+  add_foreign_key "teams", "hunts"
 end
