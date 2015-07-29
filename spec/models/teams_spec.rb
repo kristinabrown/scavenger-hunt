@@ -72,4 +72,12 @@ RSpec.describe :Team, type: :model do
     expect(team).to be_valid
   end
 
+  it 'belongs to a single hunt' do
+    expect(team.hunt.name).to eq('Turing Scavenger Hunt')
+    hunt_2 = Hunt.new(name: 'A different hunt')
+    team.hunt = hunt_2
+    expect(team.hunt.name).to eq('A different hunt')
+    expect(team.hunt.name).to_not eq('Turing Scavenger Hunt')
+  end
+
 end

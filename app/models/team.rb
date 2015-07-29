@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+  belongs_to :hunt
   has_many :submissions
   validates :name, presence: true, length: { maximum: 30, minimum: 2 }
   validates :slug, presence: true
