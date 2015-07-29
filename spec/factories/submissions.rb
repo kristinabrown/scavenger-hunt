@@ -1,9 +1,21 @@
 FactoryGirl.define do
-  factory :submission do
+  factory :submission_1, class: Submission do
     correct false
-    attachment_file_name "MyString"
-    attachment_content_type "MyString"
-    attachment_file_size 1
-    attachment_updated_at "2015-07-28 16:37:14"
+    responded_to false
+  end
+  
+  factory :submission_2, class: Submission do
+    correct true
+    responded_to true
+  end
+  
+  factory :submission_3, class: Submission do
+    correct false
+    responded_to true
+  end
+  
+  factory :submission_4, class: Submission do
+    correct false
+    responded_to false
   end
 end
