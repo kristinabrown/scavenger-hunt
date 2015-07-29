@@ -13,10 +13,6 @@ RSpec.describe :Team, type: :model do
     expect(team).to be_valid
   end
 
-  it 'has a default active state of true' do
-    expect(team.active).to be true
-  end
-
   it 'has a default found locations of 0' do
     expect(team.found_locations).to eq(0)
   end
