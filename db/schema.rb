@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729200449) do
+ActiveRecord::Schema.define(version: 20150729204738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,13 +33,16 @@ ActiveRecord::Schema.define(version: 20150729200449) do
   add_index "clues", ["location_id"], name: "index_clues_on_location_id", using: :btree
 
   create_table "hunts", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "number_of_teams"
+    t.boolean "active",          default: true
   end
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "active",     default: true
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -52,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150729200449) do
     t.datetime "updated_at",                              null: false
     t.integer  "team_id"
     t.integer  "location_id"
+    t.boolean  "responded_to",            default: false
   end
 
   add_index "submissions", ["location_id"], name: "index_submissions_on_location_id", using: :btree
@@ -60,7 +64,6 @@ ActiveRecord::Schema.define(version: 20150729200449) do
   create_table "teams", force: :cascade do |t|
     t.string  "name"
     t.integer "hunt_id"
-    t.boolean "active",          default: true
     t.string  "slug"
     t.string  "phone_number"
     t.integer "found_locations", default: 0
