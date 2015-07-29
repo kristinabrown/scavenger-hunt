@@ -16,6 +16,30 @@ ActiveRecord::Schema.define(version: 20150729032432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "admins", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clues", force: :cascade do |t|
+    t.string   "info"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "clues", ["location_id"], name: "index_clues_on_location_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "clues", "locations"
+
   create_table "hunts", force: :cascade do |t|
     t.string "name"
   end
