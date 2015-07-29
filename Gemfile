@@ -14,6 +14,7 @@ gem 'figaro'
 
 group :development, :test do
   gem 'pry'
+  gem 'guard-rspec', require: false
   gem 'rspec-rails'
   gem 'web-console', '~> 2.0'
   gem 'spring'
