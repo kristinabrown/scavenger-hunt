@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+  has_many :submissions
   validates :name, presence: true, length: { maximum: 30, minimum: 2 }
   validates :slug, presence: true
   validates :phone_number, presence: true, numericality: { only_integer: true }, format: { with: /^[1].*$/,

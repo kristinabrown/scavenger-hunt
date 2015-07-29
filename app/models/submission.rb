@@ -1,5 +1,5 @@
 class Submission < ActiveRecord::Base
-  
+  belongs_to :team
   has_attached_file :attachment, default_url: "*******",
                                  storage: :s3,
                                  bucket: ENV['S3_BUCKET_NAME'],
