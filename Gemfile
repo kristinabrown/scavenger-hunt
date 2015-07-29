@@ -21,5 +21,6 @@ group :development, :test do
   gem 'spring'
   gem 'factory_girl_rails'
   gem 'emoji-rspec', git: "git@github.com:carhartl/emoji-rspec.git", branch: "rspec-3"
+  gem 'database_cleaner'
 end
 
