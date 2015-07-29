@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729141635) do
+ActiveRecord::Schema.define(version: 20150729200449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,16 +31,6 @@ ActiveRecord::Schema.define(version: 20150729141635) do
   end
 
   add_index "clues", ["location_id"], name: "index_clues_on_location_id", using: :btree
-
-  create_table "huntlocations", force: :cascade do |t|
-    t.integer  "hunt_id"
-    t.integer  "location_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "huntlocations", ["hunt_id"], name: "index_huntlocations_on_hunt_id", using: :btree
-  add_index "huntlocations", ["location_id"], name: "index_huntlocations_on_location_id", using: :btree
 
   create_table "hunts", force: :cascade do |t|
     t.string "name"
@@ -74,14 +64,15 @@ ActiveRecord::Schema.define(version: 20150729141635) do
     t.string  "slug"
     t.string  "phone_number"
     t.integer "found_locations", default: 0
+    t.integer "location_id"
   end
 
   add_index "teams", ["hunt_id"], name: "index_teams_on_hunt_id", using: :btree
+  add_index "teams", ["location_id"], name: "index_teams_on_location_id", using: :btree
 
   add_foreign_key "clues", "locations"
-  add_foreign_key "huntlocations", "hunts"
-  add_foreign_key "huntlocations", "locations"
   add_foreign_key "submissions", "locations"
   add_foreign_key "submissions", "teams"
   add_foreign_key "teams", "hunts"
+  add_foreign_key "teams", "locations"
 end
