@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728222747) do
+ActiveRecord::Schema.define(version: 20150729032432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,4 +39,31 @@ ActiveRecord::Schema.define(version: 20150728222747) do
   end
 
   add_foreign_key "clues", "locations"
+
+  create_table "hunts", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.boolean  "correct",                 default: false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string  "name"
+    t.integer "hunt_id"
+    t.boolean "active",          default: true
+    t.string  "slug"
+    t.string  "phone_number"
+    t.integer "found_locations", default: 0
+  end
+
+  add_index "teams", ["hunt_id"], name: "index_teams_on_hunt_id", using: :btree
+
+  add_foreign_key "teams", "hunts"
 end
