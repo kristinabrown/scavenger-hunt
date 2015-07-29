@@ -7,6 +7,10 @@ class SubmissionsController < ApplicationController
     respond_with Submission.create(submission_params), location: nil
   end
   
+  def index
+    respond_with Submission.where(responded_to: false)
+  end
+  
   private
   
   def submission_params
