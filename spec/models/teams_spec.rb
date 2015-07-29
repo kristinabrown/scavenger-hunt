@@ -26,7 +26,7 @@ RSpec.describe :Team, type: :model do
     expect(team).to be_invalid
   end
 
-  it 'cannot have a team name longer than 20 characters' do
+  it 'cannot have a team name longer than 30 characters' do
     team.name = 'This name is 31 characters long'
     expect(team).to be_invalid
     team.name = 'This name is 30 characters lon'
