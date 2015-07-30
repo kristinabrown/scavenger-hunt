@@ -10,7 +10,6 @@ class TeamsController < ApplicationController
   def update
     team = Team.find_by!(id: params[:id])
     respond_with team.update(team_params), location: nil
-    p "============================================================\n----------------------------------\m+++++++++++++++++++++++++++++++++++ #{team.name}"
   end
 
   def index
