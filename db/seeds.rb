@@ -10,6 +10,8 @@ class Seed
 
   def self.development
     generate_locations
+    generate_hunts
+    generate_submissions
   end
 
   def self.generate_locations
@@ -34,14 +36,30 @@ class Seed
     puts "Locations generated."
   end
 
-  def self.generate_team
-    # Team.create()
+  def self.generate_team(hunt_id)
+    Team.create(phone_number: generate_phone_number, hunt_id: hunt_id)
+    puts "Team generated."
   end
 
-  def self.submissions
+  def self.generate_submissions
+    Team.all.each do |team|
+      correct_bool = [true, false].sample
+      responded_bool = [true, false].sample
+      Submission.create(correct: correct_bool, team_id: team.id, location_id: team.location_id, responded_to: responded_bool)
+    end
+    puts "Submissions generated."
   end
 
-  def self.hunt
+  def self.generate_hunts
+    old_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3, active: false)
+    3.times { generate_team(old_hunt.id) }
+    new_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3)
+    3.times { generate_team(new_hunt.id) }
+    puts "Hunts generated."
+  end
+
+  def self.generate_phone_number
+    "1#{rand.to_s[2..11]}" 
   end
 
 end
