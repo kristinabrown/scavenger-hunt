@@ -8,7 +8,8 @@ class TeamsController < ApplicationController
   end
 
   def update
-    respond_with Team.update(team_params), location: nil
+    team = Team.find_by!(id: params[:id])
+    respond_with team.update(team_params), location: nil
   end
 
   def index

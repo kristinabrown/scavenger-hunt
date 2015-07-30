@@ -32,13 +32,16 @@ RSpec.describe TeamsController, type: :controller do
   end
 
   describe "PATCH #update" do
-    xit "update the team name" do
-      expect(team1.name).to eq("team 1")
+    it "update the team name" do
+      non_factory_girl_team = Team.create(name: "team", hunt_id: hunt.id, phone_number: 17777777777)
+      expect(non_factory_girl_team.name).to eq("team")
 
-      params = {name: "New Name", id: team1.id}
-      patch :update, format: :json, team: params
+      params = {name: "New Name", id: non_factory_girl_team.id}
+      patch :update, id: non_factory_girl_team.id, format: :json, team: params
 
-      expect(team1.name).to eq("New Name")
+      result = Team.find_by!(id: non_factory_girl_team).name
+
+      expect(result).to eq("New Name")
     end
   end
 
