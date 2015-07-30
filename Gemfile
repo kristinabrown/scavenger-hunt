@@ -12,7 +12,6 @@ gem "paperclip", "~> 4.3"
 gem 'aws-sdk', '< 2.0'
 gem 'figaro'
 gem 'responders'
-gem 'faker'
 
 group :development, :test do
   gem 'pry'

@@ -7,6 +7,14 @@ class TeamsController < ApplicationController
     respond_with Team.create(team_params), location: nil
   end
 
+  def update
+    respond_with Team.update(team_params), location: nil
+  end
+
+  def index
+    respond_with Team.on_current_hunt(params["team"]["hunt_id"])
+  end
+
 
   private
 

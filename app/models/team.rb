@@ -25,8 +25,12 @@ class Team < ActiveRecord::Base
   end
 
   def set_start_location
-    @number_of_locations ||= Location.length
+    @number_of_locations ||= Location.count
 
     self.location_id = (0...@number_of_locations).to_a.sample
+  end
+
+  def self.on_current_hunt(hunt_id)
+    self.joins(:hunt).where(hunt_id: hunt_id)
   end
 end
