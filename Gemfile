@@ -16,6 +16,7 @@ gem 'faker'
 
 group :development, :test do
   gem 'pry'
+  gem 'faker'
   gem 'guard-rspec', require: false
   gem 'rspec-rails'
   gem 'web-console', '~> 2.0'
