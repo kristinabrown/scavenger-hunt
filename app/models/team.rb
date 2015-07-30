@@ -26,6 +26,15 @@ class Team < ActiveRecord::Base
 
   def set_start_location
     @location_ids ||= Location.all.map(&:id)
-    self.update(location_id: @location_ids.sample)
+    already_taken   = Hunt.find_by(id: self.hunt_id).teams.pluck(:location_id)
+    unique_start = @location_ids.sample
+    while already_taken.include?(unique_start)
+      unique_start = @location_ids.sample
+    end 
+    self.update(location_id: unique_start)
+  end
+
+  def self.on_current_hunt(hunt_id)
+    self.joins(:hunt).where(hunt_id: hunt_id)
   end
 end

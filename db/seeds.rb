@@ -36,9 +36,9 @@ class Seed
     puts "Locations generated."
   end
 
-  def self.generate_team
+  def self.generate_team(hunt_id)
+    Team.create(phone_number: generate_phone_number, hunt_id: hunt_id)
     puts "Team generated."
-    Team.create(phone_number: generate_phone_number)
   end
 
   def self.generate_submissions
@@ -52,9 +52,9 @@ class Seed
 
   def self.generate_hunts
     old_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3, active: false)
-    3.times { old_hunt.teams << generate_team }
+    3.times { generate_team(old_hunt.id) }
     new_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3)
-    3.times { new_hunt.teams << generate_team }
+    3.times { generate_team(new_hunt.id) }
     puts "Hunts generated."
   end
 
