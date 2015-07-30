@@ -28,7 +28,9 @@ RSpec.describe TeamsController, type: :controller do
 
   describe "PATCH #update" do
     it "updates the team name" do
-      
+
+    end
+  end
 
 
 
