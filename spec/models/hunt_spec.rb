@@ -41,4 +41,11 @@ RSpec.describe :Hunt, type: :model do
     expect(hunt.teams.count).to eq(3)
   end
 
+  it 'is invalid without a set number of teams' do
+    hunt.number_of_teams = nil
+    expect(hunt).to be_invalid
+    hunt.number_of_teams = 1
+    expect(hunt).to be_valid
+  end
+
 end
