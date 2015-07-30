@@ -41,7 +41,7 @@ RSpec.describe SubmissionsController, type: :controller do
   
   describe "PATCH#update" do
     #I need help with this one, for some reason the correct won't update
-  xit "updates a submission" do
+  it "updates a submission" do
       expect(submission_1.correct).to eq(false)
       params = {submission_id: submission_1.id, correct: true}
       put :update, :id => submission_1.id, format: :json, submission: params
