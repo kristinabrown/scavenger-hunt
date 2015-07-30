@@ -17,11 +17,6 @@ RSpec.describe :Team, type: :model do
     expect(team.found_locations).to eq(0)
   end
 
-  xit 'is invalid without a team name' do
-    team.name = nil
-    expect(team).to be_invalid
-  end
-
   it 'cannot have a team name longer than 30 characters' do
     team.name = 'This name is 31 characters long'
     expect(team).to be_invalid
@@ -34,11 +29,6 @@ RSpec.describe :Team, type: :model do
     expect(team).to be_invalid
     team.name = 'TO'
     expect(team).to be_valid
-  end
-
-  xit 'is invalid without a slug' do
-    team.slug = nil
-    expect(team).to be_invalid
   end
 
   it 'is invalid without a phone number' do
