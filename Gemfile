@@ -12,6 +12,7 @@ gem "paperclip", "~> 4.3"
 gem 'aws-sdk', '< 2.0'
 gem 'figaro'
 gem 'responders'
+gem 'faker'
 
 group :development, :test do
   gem 'pry'
@@ -23,4 +24,3 @@ group :development, :test do
   gem 'emoji-rspec', git: "git@github.com:carhartl/emoji-rspec.git", branch: "rspec-3"
   gem 'database_cleaner'
 end
-
