@@ -5,9 +5,8 @@ class SubmissionsController < ApplicationController
   
   def update
     @submission = Submission.find(params[:submission][:submission_id])
-    if @submission.update(correct: params[:submission][:correct])
-      respond_with @submission, location: nil
-    end
+    @submission.update(correct: params[:submission][:correct])
+    respond_with @submission, location: nil
   end
   
   def create

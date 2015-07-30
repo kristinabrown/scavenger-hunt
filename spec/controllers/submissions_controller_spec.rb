@@ -45,7 +45,7 @@ RSpec.describe SubmissionsController, type: :controller do
       expect(submission_1.correct).to eq(false)
       params = {submission_id: submission_1.id, correct: true}
       put :update, :id => submission_1.id, format: :json, submission: params
-      
+      submission_1 = Submission.find(10)
       expect(submission_1.correct).to eq(true)
     end
   end
