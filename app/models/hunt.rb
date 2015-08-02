@@ -8,4 +8,10 @@ class Hunt < ActiveRecord::Base
     Hunt.find(id).update(active: false)
   end
 
+  def self.current_hunt_data
+    current_hunt = Hunt.includes(:teams).last
+    { id: current_hunt.id, name: current_hunt.name, 
+      active: current_hunt.active, teams: current_hunt.teams }.to_json
+  end
+
 end
