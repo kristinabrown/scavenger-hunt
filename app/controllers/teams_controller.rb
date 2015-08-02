@@ -16,6 +16,9 @@ class TeamsController < ApplicationController
     respond_with Team.on_current_hunt(params["team"]["hunt_id"])
   end
 
+  def show
+  end
+
 
   private
 
