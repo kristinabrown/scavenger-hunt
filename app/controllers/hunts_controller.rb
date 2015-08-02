@@ -3,6 +3,10 @@ require 'json'
 class HuntsController < ApplicationController
   respond_to :json
 
+  def index
+    respond_with Hunt.current_hunt_data, location: nil
+  end
+
   def create
     respond_with Hunt.create(hunt_params), location: nil
   end
