@@ -1,9 +1,3 @@
-class ScavengerHunt.Routers.Hunts = Backbone.Routers.extend({
-  routes: {
-    '/admin-dashboard': 'dashboard' //#dashboard
-  }
+ScavengerHunt.Routers.Hunts = Backbone.Router.extend({
 
-  initialize: {
-    alert('Hello from Backbone!');
-  }
 });
