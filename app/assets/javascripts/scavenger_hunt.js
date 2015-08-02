@@ -4,7 +4,6 @@ window.ScavengerHunt = {
   Views: {},
   Routers: {},
   initialize: function() {
-    new ScavengerHunt.Routers.Hunts({});
     alert('Hello from Backbone!');
   }
 };
