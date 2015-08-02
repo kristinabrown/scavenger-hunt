@@ -5,6 +5,7 @@ window.ScavengerHunt = {
   Routers: {},
   initialize: function() {
     new ScavengerHunt.Routers.Hunts();
+    new ScavengerHunt.Views.HuntsNew();
     Backbone.history.start();
   }
 };

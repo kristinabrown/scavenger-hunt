@@ -3,8 +3,12 @@ ScavengerHunt.Routers.Hunts = Backbone.Router.extend({
     "admin-dashboard": "dashboard"
   },
 
+  initialize: function() {
+    this.collection = new ScavengerHunt.Collections.Hunts;
+  },
+
   dashboard: function() {
-    console.log("home page hitting")
-    alert("Hunt dashboard")
+    view = new ScavengerHunt.Views.HuntsNew;
+    view.render();
   }
 });
