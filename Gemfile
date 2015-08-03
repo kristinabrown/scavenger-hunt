@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'materialize-sass'
 gem 'pg'
 gem 'rails', '4.2.3'
 gem 'sass-rails', '~> 5.0'
