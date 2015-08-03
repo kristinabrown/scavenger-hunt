@@ -31,7 +31,7 @@ class Team < ActiveRecord::Base
     unique_start    = location_ids.sample
     while already_taken.include?(unique_start)
       unique_start = location_ids.sample
-    end 
+    end
     self.update(location_id: unique_start)
   end
 

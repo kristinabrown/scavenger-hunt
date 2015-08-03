@@ -57,11 +57,11 @@ ScavengerHunt.Views.HuntsNew = Backbone.View.extend({
     event.preventDefault();
     teamCollection = new ScavengerHunt.Collections.Teams;
     var teamCount = $(".phone-numbers").children().length;
+    var huntID = data.responseJSON['id'];
     for (var i = 0; i < teamCount; i++) {
       teamCollection.create({
-        name: 'Team ' + i,
         phone_number: $("#team"+i).val(),
-        hunt_id: data.responseJSON['id']
+        hunt_id: huntID
       })
     }
 
