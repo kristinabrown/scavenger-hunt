@@ -21,20 +21,20 @@ ScavengerHunt.Views.HuntsNew = Backbone.View.extend({
       for (var i = 0; i < currentHuntData.teams.length; i++) {
         $("#standings-list").append("<tr><td>" + currentHuntData.teams[i].name + "</td><td>" + currentHuntData.teams[i].current_location + "</td><td>" + currentHuntData.teams[i].found_locations + "</td></tr>")
         $("#submissions").append("<div class='row'>"
-                                  + "<div class='col s12 m7'>"
+                                  + "<div class='col s12 m9'>"
                                     + "<div class='card'>"
-                                      + "<div class='card-image'>"
+                                      + "<div class='card-image hoverable'>"
                                         + "<img src='https://icorockies.com/wp-content/uploads/2010/11/colorado_capital.jpg'>"
-                                          + "<span class='card-title'>Card Title</span>"
+                                        + "<span class='card-title'>Card Title</span>"
                                       + "</div>"
-                                      + "<div class='card-content'>"
-                                        + "<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>"
+                                        + "<div class='card-content'>"
+                                          + "<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>"
+                                        + "</div>"
+                                        + "<div class='card-action'><a href='#'>This is a link</a>"
+                                        + "</div>"
                                       + "</div>"
-                                      + "<div class='card-action'><a href='#'>This is a link</a>"
-                                      + "</div>"
-                                    + "</div>"
+                                    +"</div>"
                                   +"</div>"
-                                +"</div>"
       )}
     } else if(currentHuntData['active']){
       $(".container").html(this.$el.html(this.templatePhone()));
@@ -69,7 +69,7 @@ ScavengerHunt.Views.HuntsNew = Backbone.View.extend({
 
   setupGame: function(event) {
     event.preventDefault();
-    this.createNewHunt(number_of_teams);
+    this.createNewHunt();
   },
 
   createNewHunt: function(){
