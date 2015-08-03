@@ -13,7 +13,7 @@ gem "paperclip", "~> 4.3"
 gem 'aws-sdk', '< 2.0'
 gem 'figaro'
 gem 'responders'
-gem 'backbone-on-rails'
+gem 'underscore-rails'
 gem 'awesome_print'
 
 group :development, :test do
