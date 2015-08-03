@@ -3,11 +3,18 @@ require 'json'
 
 RSpec.describe TeamsController, type: :controller do
 
-  let!(:team1)  { create(:team) }
-  let!(:team2)  { create(:team_2) }
-  let!(:team3)  { create(:team_3) }
-  let!(:hunt) { create(:hunt) }
+
   let!(:location) { create(:location) }
+  let!(:location_2) { create(:location_2) }
+  let!(:location_3) { create(:location_3) }
+  let!(:location_4) { create(:location_4) }
+
+  let!(:hunt) { create(:hunt) }
+
+  let!(:team1)  { create(:team, hunt_id: hunt.id) }
+  let!(:team2)  { create(:team_2, hunt_id: hunt.id) }
+  let!(:team3)  { create(:team_3, hunt_id: hunt.id) }
+
   let!(:submission_1) { create(:submission_1)}
   let!(:submission_2) { create(:submission_2)}
   let!(:submission_3) { create(:submission_3)}
@@ -47,26 +54,14 @@ RSpec.describe TeamsController, type: :controller do
 
   describe "GET #index" do
     it "gets an index of all teams on current hunt" do
-      params = {phone_number: "12223334440" , hunt_id: hunt.id}
-      post :create, format: :json, team: params
-
-      params = {phone_number: "12223334449" , hunt_id: hunt.id}
-      post :create, format: :json, team: params
-
 
       params = {hunt_id: hunt.id}
 
       get :index, format: :json, team: params
 
       data = JSON.parse(response.body, symbolize_names: true)
-      expect(data.count).to eq(2)
+      expect(data.count).to eq(3)
     end
   end
-
-
-
-
-
-
 
 end
