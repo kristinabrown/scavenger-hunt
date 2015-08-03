@@ -1,6 +1,7 @@
 class Team < ActiveRecord::Base
   belongs_to :hunt
   has_many :submissions
+  belongs_to :location
 
   validates :name, presence: true, length: { maximum: 30, minimum: 2 }
   validates :slug, presence: true, uniqueness: true
@@ -25,13 +26,13 @@ class Team < ActiveRecord::Base
   end
 
   def set_start_location
-    @location_ids ||= Location.all.map(&:id)
+    location_ids    = Location.all.map(&:id)
     already_taken   = Hunt.find_by(id: self.hunt_id).teams.pluck(:location_id)
-    unique_start = @location_ids.sample
+    unique_start    = location_ids.sample
     while already_taken.include?(unique_start)
-      unique_start = @location_ids.sample
+      unique_start = location_ids.sample
     end
-    self.location_id = unique_start
+    self.update(location_id: unique_start)
   end
 
   def self.on_current_hunt(hunt_id)

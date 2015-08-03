@@ -3,9 +3,16 @@ require 'rails_helper'
 RSpec.describe :Hunt, type: :model do
 
   let!(:hunt)  { create(:hunt) }
-  let(:team)   { create(:team) }
-  let(:team_2) { create(:team_2) }
-  let(:team_3) { create(:team_3) }
+
+  let!(:location_1) { create(:location) }
+  let!(:location_2) { create(:location_2) }
+  let!(:location_3) { create(:location_3) }
+  let!(:location_4) { create(:location_4) }
+  
+  let(:team)   { create(:team, hunt_id: hunt.id) }
+  let(:team_2) { create(:team_2, hunt_id: hunt.id) }
+  let(:team_3) { create(:team_3, hunt_id: hunt.id) }
+
 
   it 'is valid with proper attributes' do
     expect(hunt).to be_valid
