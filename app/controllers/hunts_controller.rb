@@ -4,7 +4,7 @@ class HuntsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Hunt.current_hunt_data, location: nil
+    respond_with Hunt.current_hunt_data
   end
 
   def create
