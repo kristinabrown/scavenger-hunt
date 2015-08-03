@@ -2,16 +2,21 @@ require 'rails_helper'
 require 'json'
 
 RSpec.describe SubmissionsController, type: :controller do
-  let!(:hunt) { create(:hunt) }
-  let!(:team) { create(:team) }
+  
   let!(:location) { create(:location) }
+  let!(:location_2) { create(:location_2) }
+  let!(:location_3) { create(:location_3) }
+  let!(:location_4) { create(:location_4) }
+
+  let!(:hunt) { create(:hunt) }
+  let!(:team) { create(:team, hunt_id: hunt.id) }
+
   let!(:submission_1) { create(:submission_1)}
   let!(:submission_2) { create(:submission_2)}
   let!(:submission_3) { create(:submission_3)}
   let!(:submission_4) { create(:submission_4)}
 
   before(:each) do
-    team.hunt_id = hunt.id
     submission_2.team_id = team.id
     team.submissions << submission_2
   end
@@ -21,7 +26,6 @@ RSpec.describe SubmissionsController, type: :controller do
       beginning_count = Submission.count
       params = {team_id: team.id.to_s, location_id: location.id.to_s}
       post :create, format: :json, submission: params
-
       expect(Submission.count).to eq(beginning_count + 1)
       expect(Submission.last.team_id).to eq(team.id)
       expect(Submission.last.correct).to eq(false)
@@ -40,8 +44,7 @@ RSpec.describe SubmissionsController, type: :controller do
   end
   
   describe "PATCH#update" do
-    #I need help with this one, for some reason the correct won't update
-  it "updates a submission" do
+    it "updates a submission" do
       expect(submission_1.correct).to eq(false)
       params = {submission_id: submission_1.id, correct: true}
       put :update, :id => submission_1.id, format: :json, submission: params

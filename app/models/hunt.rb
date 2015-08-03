@@ -10,7 +10,6 @@ class Hunt < ActiveRecord::Base
   end
 
   def self.current_hunt_data
-    binding.pry
     current_hunt = Hunt.includes(:teams).last
     { id: current_hunt.id, name: current_hunt.name,
       active: current_hunt.active, number_of_teams: current_hunt.number_of_teams, teams: current_hunt.teams }.to_json
