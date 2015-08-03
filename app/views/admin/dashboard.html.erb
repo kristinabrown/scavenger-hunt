@@ -1,12 +1,68 @@
-<div class="container">
-  <div id="standings">
-    <ul id='standings-list'>
+<!-- new hunt -->
+<div class="hidden new_hunt">
+  <div class="new_hunt_header">
+    <h2>Create a Hunt!</h2>
+  </div>
+  <div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="name_of_hunt" type="text" class="validate">
+        <label for="text">Cohort</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s5">
+        <input id="number_of_teams" type="number" class="validate" placeholder="3">
+        <label for="number"># of teams</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s5">
+        <button class="btn waves-effect waves-light" id="new_hunt_button" type="submit" name="action">Activate Hunt</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
 
-    </ul>
+<!-- team numbers -->
+
+
+<div class="team_numbers hidden">
+  <h2>Put in team numbers: </h2>
+  <ol id="team_phone_number_list">
+    
+  </ol>
+  <div class="row">
+    <div class="input-field col s5">
+      <button class="btn waves-effect waves-light" id="create_teams_button" type="submit" name="action">Create Teams</button>
+    </div>
+  </div>
+</div>
+
+<!-- dashboard -->
+<h1 class="center">Admin Dashboard</h1>
+<div class="dashboard">
+  <div id="standings">
+    <h3>Standings</h3>
+    <table class="hoverable">
+      <thead>
+        <tr>
+            <th data-field="name">Team Name</th>
+            <th data-field="name">Current Location</th>
+            <th data-field="number">Completed</th>
+        </tr>
+      </thead>
+
+      <tbody class="standings_list">
+      </tbody>
+    </table>
   </div>
 
 
   <div id="submissions">
+    <h3>Submissions</h3>
 
   </div>
 </div>
