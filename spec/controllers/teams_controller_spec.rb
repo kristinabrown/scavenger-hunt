@@ -50,6 +50,14 @@ RSpec.describe TeamsController, type: :controller do
 
       expect(result).to eq("New Name")
     end
+
+    it 'updates hunt_initiated' do
+      params = {id: team1.id, hunt_initiated: true}
+      patch :update, id: team1.id, team: params, format: :json
+    
+      result = Team.find_by!(id: team1.id).hunt_initiated
+      expect(result).to be true
+    end
   end
 
   describe "GET #index" do
@@ -61,6 +69,15 @@ RSpec.describe TeamsController, type: :controller do
 
       data = JSON.parse(response.body, symbolize_names: true)
       expect(data.count).to eq(3)
+    end
+  end
+
+  describe "GET #team_data" do
+    it "gets individual team data" do
+      get :team_data, format: :json, id: team1.id
+
+      data = JSON.parse(response.body, symbolize_names: true)
+      expect(data[:team_info][:hunt_initiated]).to be false
     end
   end
 
