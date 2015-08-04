@@ -33,7 +33,7 @@ class Team < ActiveRecord::Base
   end
 
   def set_start_location
-    self.update(location_id: 1)
+    self.update(location_id: Location.first.id)
   end
 
   # def set_start_location

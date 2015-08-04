@@ -43,8 +43,8 @@ RSpec.describe TeamsController, type: :controller do
       non_factory_girl_team = Team.create(name: "team", hunt_id: hunt.id, phone_number: 17777777777)
       expect(non_factory_girl_team.name).to eq("team")
 
-      params = {name: "New Name", id: non_factory_girl_team.id}
-      patch :update, id: non_factory_girl_team.id, format: :json, team: params
+      params = {name: "New Name"}
+      patch :update, slug: non_factory_girl_team.slug, format: :json, team: params
 
       result = Team.find_by!(id: non_factory_girl_team).name
 
@@ -53,7 +53,7 @@ RSpec.describe TeamsController, type: :controller do
 
     it 'updates hunt_initiated' do
       params = {id: team1.id, hunt_initiated: true}
-      patch :update, id: team1.id, team: params, format: :json
+      patch :update, slug: team1.slug, team: params, format: :json
     
       result = Team.find_by!(id: team1.id).hunt_initiated
       expect(result).to be true
@@ -74,7 +74,7 @@ RSpec.describe TeamsController, type: :controller do
 
   describe "GET #team_data" do
     it "gets individual team data" do
-      get :team_data, format: :json, id: team1.id
+      get :team_data, format: :json, slug: team1.slug
 
       data = JSON.parse(response.body, symbolize_names: true)
       expect(data[:team_info][:hunt_initiated]).to be false
