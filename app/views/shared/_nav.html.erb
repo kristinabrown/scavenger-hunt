@@ -8,9 +8,15 @@
 
 
         <ul class="right hide-on-med-and-down">
-          <li class="col s6 login">
-              <%= link_to "Admin", "/login" %>
-          </li>
+          <% if current_admin %>
+            <li class="col s6 login">
+                <%= link_to "Logout", "/logout", method: "delete" %>
+            </li>
+          <% else  %>
+            <li class="col s6 login">
+                <%= link_to "Admin", "/login" %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
