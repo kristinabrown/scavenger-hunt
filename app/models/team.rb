@@ -13,6 +13,10 @@ class Team < ActiveRecord::Base
   before_validation :generate_starting_name
   before_validation :generate_slug
 
+  def to_param
+    self.slug
+  end
+
   def set_locations_found
     self.found_locations ||= 0
   end
