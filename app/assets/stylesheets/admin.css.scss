@@ -1,3 +1,60 @@
 .hidden {
   display: none;
 }
+
+.new_hunt{
+  margin-top: 65px;
+}
+
+.team_numbers {
+  margin-top: 65px;
+}
+
+.dashboard {
+  margin-top: 65px;
+}
+
+.admin-login {
+  margin-top: 65px;
+}
+
+.admin-header {
+  margin-top: 65px;
+}
+
+// navbar
+
+.navbar {
+  min-height: 120px;
+}
+
+.turing_img {
+  margin-top: 19px;
+  width: 18%;
+}
+
+#brand-logo {
+  margin-left: 5px;
+  font-size: 1.2em;
+}
+
+.landing-header {
+  margin-top: 80px;
+}
+
+.login {
+  margin-right: 50px;
+  margin-top: 25px;
+}
+
+.flash_errors {
+  margin-top: 70px;
+  background-color: rgb(161, 35, 38);
+  color: white;
+}
+
+.flash_notice {
+  margin-top: 70px;
+  background-color: rgb(13, 116, 10);
+  color: white;
+}

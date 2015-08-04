@@ -52,6 +52,7 @@ GEM
     aws-sdk-v1 (1.64.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -262,6 +263,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   aws-sdk (< 2.0)
+  bcrypt (~> 3.1.7)
   better_errors
   capybara
   coffee-rails (~> 4.1.0)
