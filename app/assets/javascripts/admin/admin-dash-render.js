@@ -1,16 +1,27 @@
+function adminViewController(){
+  window.adminData = 'no adminData window';
+  gatherCurrentHuntData();
+  setInterval(gatherCurrentHuntData, 5000);
+}
+
 function gatherCurrentHuntData(){
   $.getJSON("/hunts", function(xhr){
-    renderCorrectTemplate(xhr);
+    if(!(_.isEqual(xhr, adminData))){
+      resetPageState();
+      renderCorrectTemplate(xhr);
+    };
+    adminData = _.clone(xhr);
   });
 };
 
 function renderCorrectTemplate(currentHuntData){
-  resetPageState();
+  console.log("win")
+
 
   if(currentHuntData.active && currentHuntData.teams.length > 0){
-    showAdminDashboardPage(currentHuntData.teams.length);
+    showAdminDashboardPage(currentHuntData);
   } else if (currentHuntData.active){
-    showTeamPhoneNumbersPage(currentHuntData.number_of_teams);
+    showTeamPhoneNumbersPage(currentHuntData);
   } else {
     showNewHuntPage();
   }

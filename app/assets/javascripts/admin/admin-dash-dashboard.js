@@ -1,7 +1,7 @@
-function showAdminDashboardPage(numberOfTeams) {
+function showAdminDashboardPage(data) {
   $(".dashboard").toggle();
-  for (var i = 0; i < numberOfTeams; i++) {
-    $(".standings_list").append("<tr><td>" + currentHuntData.teams[i].name + "</td><td>" + currentHuntData.teams[i].location_id + "</td><td>" + currentHuntData.teams[i].found_locations + "</td></tr>");
+  for (var i = 0; i < data.teams.length; i++) {
+    $(".standings_list").append("<tr><td>" + data.teams[i].name + "</td><td>" + data.teams[i].location_id + "</td><td>" + data.teams[i].found_locations + "</td></tr>");
 
 
     //this is a sample submission it needs to be removed when we implement submissions
