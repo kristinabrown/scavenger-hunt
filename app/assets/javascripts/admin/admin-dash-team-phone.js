@@ -1,7 +1,8 @@
-function showTeamPhoneNumbersPage(numberOfTeams){
+function showTeamPhoneNumbersPage(data){
+
   $(".team_numbers").toggle();
-  for (var i = 0; i < numberOfTeams; i++) {
-    $("#team_phone_number_list").append("<li><label for='phone_number'>Team #</label><br><input name='phone_number' id='team" + [i] + "'data-hunt-id='" + currentHuntData.id + "'></input></li>");
+  for (var i = 0; i < data.number_of_teams; i++) {
+    $("#team_phone_number_list").append("<li><label for='phone_number'>Team #</label><br><input name='phone_number' id='team" + [i] + "'data-hunt-id='" + data.id + "'></input></li>");
   }
 };
 
