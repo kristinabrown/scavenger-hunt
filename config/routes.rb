@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/admin-dashboard', to: "admin#dashboard"
+  get '/dashboard', to: "admin#dashboard"
 
 
   resources :submissions, only: [:create, :index, :update]
