@@ -22,7 +22,7 @@ RSpec.describe Admin, type: :model do
   it "is not valid with a phone number not in proper format" do
     admin1 = Admin.create(name: "Sad", phone: '555-5555555')
     admin2 = Admin.create(name: "Also Sad", phone: '5555555555')
-    admin3 = Admin.create(name: "Happy", phone: '555-555-5555')
+    admin3 = Admin.create(name: "Happy", phone: '555-555-5555', password: "password")
 
     expect(admin1).to_not be_valid
     expect(admin2).to_not be_valid
@@ -30,7 +30,7 @@ RSpec.describe Admin, type: :model do
   end
 
   it "is a valid admin if both phone and name are present and properly formatted" do
-    admin = Admin.create(name: 'proper name', phone: '555-555-5555')
+    admin = Admin.create(name: 'proper name', phone: '555-555-5555', password: "password")
 
     expect(admin).to be_valid
   end

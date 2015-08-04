@@ -1,12 +1,13 @@
 require "rails_helper"
 
 feature "admin logs in" do
-  let!(:admin) {create(:admin)}
+  # let!(:admin) {Admin.create!(name: "NerdHerder", phone: "555-555-5555", password: "password")}
   
-  xscenario "with valid credentials" do 
+  xscenario "with valid credentials" do
+    Admin.create!(name: "Raissa", phone: "555-333-5555", password: "password")
     visit root_path
     click_link "Admin"
-    fill_in "session[name]", with: "NerdHerder"
+    fill_in "session[name]", with: "Raissa"
     fill_in "session[password]", with: "password"
     click_link_or_button "Login"
     
