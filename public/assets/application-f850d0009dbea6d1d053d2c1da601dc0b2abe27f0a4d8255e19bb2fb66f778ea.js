@@ -18068,7 +18068,7 @@ function resetPageState() {
   if(!($(".dashboard").is(":hidden"))) {$(".dashboard").toggle();}
 }
 ;
-function showTeamPhoneNUmbersPage(numberOfTeams){
+function showTeamPhoneNumbersPage(numberOfTeams){
   $(".team_numbers").toggle();
   for (var i = 0; i < numberOfTeams; i++) {
     $("#team_phone_number_list").append("<li><label for='phone_number'>Team #</label><br><input name='phone_number' id='team" + [i] + "'data-hunt-id='" + currentHuntData.id + "'></input></li>");
@@ -18090,11 +18090,104 @@ $(document).ready(function() {
   activateHunt();
   createTeams();
   gatherCurrentHuntData();
-  gatherTeamData();
+  
+  teamViewsController();
+  teamWelcomeView();
 });
                  
-function gatherTeamData() {
-  console.log("TEAM DATA")
+function teamViewsController(){
+  window.teamData = 'no data window';
+  setView();
+  setInterval(setView, 5000);
+};
+
+function setView() {
+  var slug     = getSlug();
+
+  $.ajax({
+    url: "/team_data/"+slug,
+    data: { 
+        "slug": slug 
+    },
+    type: "GET",
+    success: function(response) {
+      console.log(response);
+      console.log(teamData);
+      if(!(_.isEqual(response, teamData))){
+        resetTeamView();
+        toggleViews(response);  
+      };
+      teamData = _.clone(response);
+    },
+    error: function(xhr) {
+      console.log("no data error set View");
+    }
+  });
+
+};
+
+function toggleViews(currentTeamData){
+  if(currentTeamData.team_info.hunt_initiated === false){
+    $('.team_welcome').toggle();
+  } else if(currentTeamData.submission_info.responded_to === false){
+    $('.waiting').toggle();
+  } else {
+    $('.clue').toggle();
+  }
+};
+
+function resetTeamView(){
+  var welcomeView = $('.team_welcome'); 
+  var clueView    = $('.team_welcome');
+  var waitingView = $('.waiting');
+
+  if(!welcomeView.is(':hidden')){
+    welcomeView.toggle();
+  } else if(!clueView.is(':hidden')) {
+    clueView.toggle();
+  } else if(!waitingView.is(':hidden')){
+    waitingView.toggle();
+  } else {
+  };
+};
+
+function getSlug(){
+  var slug = _.last(document.URL.split('/')); 
+  return slug;
+}
+;
+function teamWelcomeView(){
+  startHunt();
+};
+
+function startHunt(){
+  $('#play_on_button').on('click', function(event){
+    event.preventDefault();    
+    updateTeamName();
+  });
+};
+
+function updateTeamName(){
+  var slug     = getSlug();
+  var teamName = $('#name_of_team').val();
+  if(teamName.length < 2){
+    teamName = "Team"+slug;
+  }
+
+  $.ajax({
+    url: "/teams/"+slug,
+    data: { 
+        "slug": slug,
+        "team": { "name": teamName, "hunt_initiated": true }
+    },
+    type: "PUT",
+    success: function(response) {
+      setView();
+    },
+    error: function(xhr) {
+      console.log("no data error update team");
+    }
+  });
 };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
