@@ -27,7 +27,7 @@ function updateTeamName(){
       setView();
     },
     error: function(xhr) {
-      console.log("no data");
+      console.log("no data error update team");
     }
   });
 };

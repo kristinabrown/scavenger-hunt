@@ -25,7 +25,7 @@
   </div>
 
   <!-- clue -->
-  <div class="clue ">
+  <div class="clue hidden">
     <h3>Clue:</h3>
     <p class="clue_info"><%#= Location.find(@team.location_id).clues.first.info %></p>
     <%= form_tag("/submissions", multipart: true) do %>
@@ -64,8 +64,8 @@
   </div>
 
   <!-- submission response -->
-  <div class="submission_response">
-    
+  <div class="submission_response hidden">
+    <h1>RESPONSE!!!</h1>
     
   </div>
 </div>
