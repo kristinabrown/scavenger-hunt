@@ -1,4 +1,4 @@
-function showTeamPhoneNUmbersPage(numberOfTeams){
+function showTeamPhoneNumbersPage(numberOfTeams){
   $(".team_numbers").toggle();
   for (var i = 0; i < numberOfTeams; i++) {
     $("#team_phone_number_list").append("<li><label for='phone_number'>Team #</label><br><input name='phone_number' id='team" + [i] + "'data-hunt-id='" + currentHuntData.id + "'></input></li>");
