@@ -1,62 +1,64 @@
-<h1>TEAMS SHOW PAGE</h1>
+<div class="container">
+  <h1>TEAMS SHOW PAGE</h1>
 
-<!-- welcome -->
-<div class="team_welcome hidden">
-  <div class="welcome_message">
-    <h3>Welcome to the Turing Scavenger Hunt!</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  </div>
-  <h5>Create a Team Name:</h5>
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="name_of_hunt" type="text" class="validate" placeholder=<%= @team.name %>>
-          <label for="text">Team Name</label>
+  <!-- welcome -->
+  <div class="team_welcome hidden">
+    <div class="welcome_message">
+      <h3>Welcome to the Turing Scavenger Hunt!</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <h5>Create a Team Name:</h5>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="name_of_hunt" type="text" class="validate" placeholder=<%= @team.name %>>
+            <label for="text">Team Name</label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s5">
-          <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Go!</button>
+        <div class="row">
+          <div class="input-field col s5">
+            <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Go!</button>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- clue -->
-
-<div class="clue hidden">
-  <h3>Clue:</h3>
-  <p class="clue_info"><%#= Location.find(@team.location_id).clues.first.info %></p>
-  <input type="file" value="Take Picture" capture="camera" accept="image/*" id="takePictureField">
-  <div class="row">
-    <div class="input-field col s5">
-      <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Submit Picture</button>
+      </form>
     </div>
   </div>
 
-<!-- picture -->
-<img id="current_image">
-</div>
+  <!-- clue -->
 
-<div class="waiting center hidden">
-  <div class="preloader-wrapper big active">
-    <div class="spinner-layer spinner-blue-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
+  <div class="clue hidden">
+    <h3>Clue:</h3>
+    <p class="clue_info"><%#= Location.find(@team.location_id).clues.first.info %></p>
+    <input type="file" value="Take Picture" capture="camera" accept="image/*" id="takePictureField">
+    <div class="row">
+      <div class="input-field col s5">
+        <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Submit Picture</button>
       </div>
     </div>
-  </div>
-  <p>waiting...</p>
-</div>
 
-<!-- submission response -->
-<div class="submission_response">
-  
-  
+  <!-- picture -->
+  <img id="current_image">
+  </div>
+
+  <div class="waiting center hidden">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+    <p>waiting...</p>
+  </div>
+
+  <!-- submission response -->
+  <div class="submission_response">
+    
+    
+  </div>
 </div>
