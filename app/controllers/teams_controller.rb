@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
   end
 
   def update
-    team = Team.find_by!(id: params[:id])
+    team = Team.find_by!(slug: params[:slug])
     respond_with team.update(team_params), location: nil
   end
 
@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
   end
 
   def team_data
-    respond_with Team.find_by!(id: params[:id]).data, location: nil
+    respond_with Team.find_by!(slug: params[:slug]).data, location: nil
   end
 
   private

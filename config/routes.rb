@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   resources :submissions, only: [:create, :index, :update]
   get '/latest-submission', to: 'submissions#latest_submission'
 
-  resources :teams, only: [:create, :update, :show, :index]
-  get '/team_data/:id', to: 'teams#team_data'
+  resources :teams, only: [:create, :show, :index]
+  put '/teams/:slug', to: 'teams#update'
+  get '/team_data/:slug', to: 'teams#team_data'
 
   resources :hunts, only: [:create, :destroy, :index]
   
