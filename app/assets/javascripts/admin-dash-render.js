@@ -14,21 +14,24 @@ function renderCorrectTemplate(currentHuntData){
       $(".dashboard").toggle();
       for (var i = 0; i < currentHuntData.teams.length; i++) {
         $(".standings_list").append("<tr><td>" + currentHuntData.teams[i].name + "</td><td>" + currentHuntData.teams[i].current_location + "</td><td>" + currentHuntData.teams[i].found_locations + "</td></tr>");
-        $("#submissions").append("<div class='row'>"
-                                  + "<div class='col s12 m9'>"
-                                    + "<div class='card'>"
-                                      + "<div class='card-image hoverable'>"
-                                        + "<img src='https://icorockies.com/wp-content/uploads/2010/11/colorado_capital.jpg'>"
-                                        + "<span class='card-title'>Card Title</span>"
-                                      + "</div>"
-                                        + "<div class='card-content'>"
-                                          + "<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>"
-                                        + "</div>"
-                                        + "<div class='card-action'><a href='#'>This is a link</a>"
-                                        + "</div>"
-                                      + "</div>"
-                                    +"</div>"
-                                  +"</div>");
+
+
+        //this is a sample submission it needs to be removed when we implement submissions
+        $("#submissions").append("<div class='row'>" +
+                                   "<div class='col s12 m9'>" +
+                                     "<div class='card'>" +
+                                       "<div class='card-image hoverable'>" +
+                                         "<img src='https://icorockies.com/wp-content/uploads/2010/11/colorado_capital.jpg'>" +
+                                         "<span class='card-title'>Card Title</span>" +
+                                       "</div>" +
+                                         "<div class='card-content'>" +
+                                           "<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>" +
+                                         "</div>" +
+                                         "<div class='card-action'><a href='#'>This is a link</a>" +
+                                         "</div>" +
+                                       "</div>" +
+                                    "</div>" +
+                                  "</div>");
       }
     } else if (currentHuntData.active){
       $(".team_numbers").toggle();
@@ -46,8 +49,9 @@ function createTeams() {
 
     var number_of_teams = $("#team_phone_number_list").children().length
     for (var i = 0; i < number_of_teams; i++) {
-      debugger
       $.post("/teams", { team: {hunt_id: $( "#team" + i ).data("huntId"), phone_number: $("#team" + i).val() }})
+      setTimeout(function(){console.log("win"+i)},5000);
+
     }
   });
 };
