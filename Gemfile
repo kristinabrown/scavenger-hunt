@@ -16,7 +16,7 @@ gem 'responders'
 gem 'underscore-rails'
 gem 'awesome_print'
 gem 'faker'
-gem 'puma'
+# gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do

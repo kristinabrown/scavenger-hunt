@@ -48,6 +48,7 @@ class Team < ActiveRecord::Base
 
   def data
     submission = self.submissions.last || OpenStruct.new(correct: false, responded_to: false)
+    
     { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated },
       location_info:   { found_locations: found_locations, location_id: location_id, location: self.location },
       submission_info: { correct: submission.correct, responded_to: submission.responded_to }
