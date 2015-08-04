@@ -13,7 +13,7 @@ function renderCorrectTemplate(currentHuntData){
     if(currentHuntData.active && currentHuntData.teams.length > 0){
       $(".dashboard").toggle();
       for (var i = 0; i < currentHuntData.teams.length; i++) {
-        $(".standings_list").append("<tr><td>" + currentHuntData.teams[i].name + "</td><td>" + currentHuntData.teams[i].current_location + "</td><td>" + currentHuntData.teams[i].found_locations + "</td></tr>");
+        $(".standings_list").append("<tr><td>" + currentHuntData.teams[i].name + "</td><td>" + currentHuntData.teams[i].location_id + "</td><td>" + currentHuntData.teams[i].found_locations + "</td></tr>");
 
 
         //this is a sample submission it needs to be removed when we implement submissions
@@ -43,14 +43,17 @@ function renderCorrectTemplate(currentHuntData){
     }
   };
 
+
 function createTeams() {
   $("#create_teams_button").on("click", function(event) {
-    // event.preventDefault();
+    event.preventDefault();
 
     var number_of_teams = $("#team_phone_number_list").children().length
     for (var i = 0; i < number_of_teams; i++) {
       $.post("/teams", { team: {hunt_id: $( "#team" + i ).data("huntId"), phone_number: $("#team" + i).val() }})
     }
+    gatherCurrentHuntData();
+    console.log("win")
   });
 };
 
