@@ -16,6 +16,7 @@ gem 'responders'
 gem 'underscore-rails'
 gem 'awesome_print'
 gem 'faker'
+gem 'puma'
 
 group :development, :test do
   gem 'pry'
