@@ -18,6 +18,10 @@ RSpec.describe :Team, type: :model do
     expect(team.found_locations).to eq(0)
   end
 
+  it 'has a default hunt_initialized of false' do
+    expect(team.hunt_initiated).to be false
+  end
+
   it 'cannot have a team name longer than 30 characters' do
     team.name = 'This name is 31 characters long'
     expect(team).to be_invalid
