@@ -1,3 +1,6 @@
+require 'json'
+require 'ostruct'
+
 class Team < ActiveRecord::Base
   belongs_to :hunt
   has_many :submissions
@@ -37,6 +40,14 @@ class Team < ActiveRecord::Base
       unique_start = location_ids.sample
     end
     self.update(location_id: unique_start)
+  end
+
+  def data
+    submission = self.submissions.last || OpenStruct.new(correct: false, responded_to: false)
+    { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated },
+      location_info:   { found_locations: found_locations, location_id: location_id, location: self.location },
+      submission_info: { correct: submission.correct, responded_to: submission.responded_to }
+    }.to_json
   end
 
   def self.on_current_hunt(hunt_id)
