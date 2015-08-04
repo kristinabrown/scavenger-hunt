@@ -10,7 +10,14 @@ class SubmissionsController < ApplicationController
   end
   
   def create
-    respond_with Submission.create(submission_params), location: nil
+    @team = Team.find(params[:team_id])
+    if Submission.create(attachment: params[:attachment], team_id: params[:team_id], location_id: params[:location_id])
+      flash[:notice] = "Submitted!"
+      redirect_to team_path(@team)
+    else
+      flash[:errors] = "Something went terribly wrong."
+      redirect_to team_path(@team)
+    end
   end
   
   def index

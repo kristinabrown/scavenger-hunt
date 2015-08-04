@@ -26,16 +26,24 @@
   </div>
 
   <!-- clue -->
-
-  <div class="clue hidden">
+  <div class="clue ">
     <h3>Clue:</h3>
     <p class="clue_info"><%#= Location.find(@team.location_id).clues.first.info %></p>
-    <input type="file" value="Take Picture" capture="camera" accept="image/*" id="takePictureField">
+    <%= form_tag("/submissions", multipart: true) do %>
+      <%= file_field_tag :attachment, {capture: "camera", accept: "image/*"}%>
+      <%= hidden_field_tag :team_id, @team.id %>
+      <%= hidden_field_tag :location_id, @team.location_id %>
+      <%= submit_tag "Take Picture" %>
+    <% end %>
+    <!-- <form accept-charset="UTF-8" action="/submissions" method="post" enctype="multipart/form-data">
+    <input type="file" value="Take Picture" capture="camera" id="takePictureField">
     <div class="row">
       <div class="input-field col s5">
-        <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Submit Picture</button>
-      </div>
+         <input name="picture" type="submit" value="Take Picture" /> -->
+        <!-- <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Submit Picture</button> -->
+      <!-- </div>
     </div>
+  </form> -->
 
   <!-- picture -->
   <img id="current_image">
