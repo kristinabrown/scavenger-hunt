@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  root "staticpages#landing"
   get '/dashboard', to: "admin#dashboard"
 
 

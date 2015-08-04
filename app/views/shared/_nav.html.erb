@@ -1,15 +1,15 @@
 <div class="navbar-fixed">
 
-    <nav>
+    <nav class="navbar">
       <div class="nav-wrapper black">
-        <!-- <%= image_tag "turing.png" %> -->
+        <%= image_tag("turing.png", :class => "turing_img") %>
         <%= link_to "Turing Scavenger Hunt", "#", id: "brand-logo" %>
 
 
 
         <ul class="right hide-on-med-and-down">
-          <li class="col s6">
-              Menu
+          <li class="col s6 login">
+              <%= link_to "Admin", "/login" %>
           </li>
         </ul>
       </div>
