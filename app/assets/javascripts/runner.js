@@ -1,9 +1,8 @@
 $(document).ready(function() {
   activateHunt();
   createTeams();
-  gatherCurrentHuntData();
-  
+  adminViewController();
+
   teamViewsController();
   teamWelcomeView();
 });
-                 

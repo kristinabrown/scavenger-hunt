@@ -18003,29 +18003,69 @@ Picker.extend( 'pickadate', DatePicker )
 
 
 
-function showAdminDashboardPage(numberOfTeams) {
+function showAdminDashboardPage(data) {
   $(".dashboard").toggle();
-  for (var i = 0; i < numberOfTeams; i++) {
-    $(".standings_list").append("<tr><td>" + currentHuntData.teams[i].name + "</td><td>" + currentHuntData.teams[i].location_id + "</td><td>" + currentHuntData.teams[i].found_locations + "</td></tr>");
-
-
-    //this is a sample submission it needs to be removed when we implement submissions
-    $("#submissions").append("<div class='row'>" +
-                               "<div class='col s12 m9'>" +
-                                 "<div class='card'>" +
-                                   "<div class='card-image hoverable'>" +
-                                     "<img src='https://icorockies.com/wp-content/uploads/2010/11/colorado_capital.jpg'>" +
-                                     "<span class='card-title'>Card Title</span>" +
-                                   "</div>" +
-                                     "<div class='card-content'>" +
-                                       "<p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>" +
-                                     "</div>" +
-                                     "<div class='card-action'><a href='#'>This is a link</a>" +
-                                     "</div>" +
-                                   "</div>" +
-                                "</div>" +
-                              "</div>");
+    $("#submissions").empty();
+    $(".standings_list").empty();
+  for (var i = 0; i < data.teams.length; i++) {
+    $(".standings_list").append("<tr><td>" + data.teams[i].name + "</td><td>" + data.teams[i].location_id + "</td><td>" + data.teams[i].found_locations + "</td></tr>");
   }
+    var submissions = data.submissions;
+    var renderedSubmissions = submissions.map(renderSubmission);
+    renderedSubmissions.forEach(bindUpdateSubmissonEvent);
+    $("#submissions").append(renderedSubmissions);
+  }
+
+function renderSubmission(submission){
+  return $("<div class='row' data-id='" + submission.data.id + "'>" +
+                             "<div class='col s12 m9'>" +
+                               "<div class='card'>" +
+                                 "<div class='card-image hoverable'>" +
+                                 "<img src='assets/" + submission.attachment_url + "'>" +
+                                 "</div>" +
+                                   "<div class='card-content'>" +
+                                     "<p>Location: " + submission.location_name + "</p>" +
+                                      "<p>Team: " + submission.team_name + "</p>" +
+                                   "</div>" +
+                                   "<div class='card-action center-align '><a class='btn-floating btn-large waves-effect waves-light red incorrect'><i class='material-icons'>BOO</i></a>" +
+                                   "<a class='btn-floating btn-large waves-effect waves-light green correct'><i class='material-icons'>Ya!</i></a>" +
+                                   "</div>" +
+                                 "</div>" +
+                              "</div>" +
+                            "</div>");
+}
+
+function bindUpdateSubmissonEvent(submission){
+  $(submission).find(".incorrect").on("click", function() {
+    console.log("incorrect")
+    var $submission = $(this).parents(".row")
+    var id = $submission.data("id")
+    $.ajax({
+      url: "/submissions/" + id,
+      dataType: "json",
+      method: "patch",
+      data: {submission: {correct: false, responded_to: true} },
+      success: function(){
+        $submission.remove();
+      }
+
+    })
+  })
+  $(submission).find(".correct").on("click", function() {
+    console.log("correct")
+    var $submission = $(this).parents(".row")
+    var id = $submission.data("id")
+    $.ajax({
+      url: "/submissions/" + id,
+      dataType: "json",
+      method: "patch",
+      data: {submission: {correct: true, responded_to: true} },
+      success: function(){
+        $submission.remove();
+      }
+
+    })
+  })
 }
 ;
 function showNewHuntPage() {
@@ -18044,19 +18084,30 @@ function activateHunt() {
   });
 }
 ;
+function adminViewController(){
+  window.adminData = 'no adminData window';
+  gatherCurrentHuntData();
+  setInterval(gatherCurrentHuntData, 5000);
+}
+
 function gatherCurrentHuntData(){
   $.getJSON("/hunts", function(xhr){
-    renderCorrectTemplate(xhr);
+    if(!(_.isEqual(xhr, adminData))){
+      resetPageState();
+      renderCorrectTemplate(xhr);
+    };
+    adminData = _.clone(xhr);
   });
 };
 
 function renderCorrectTemplate(currentHuntData){
-  resetPageState();
+  console.log("win")
+
 
   if(currentHuntData.active && currentHuntData.teams.length > 0){
-    showAdminDashboardPage(currentHuntData.teams.length);
+    showAdminDashboardPage(currentHuntData);
   } else if (currentHuntData.active){
-    showTeamPhoneNumbersPage(currentHuntData.number_of_teams);
+    showTeamPhoneNumbersPage(currentHuntData);
   } else {
     showNewHuntPage();
   }
@@ -18068,10 +18119,11 @@ function resetPageState() {
   if(!($(".dashboard").is(":hidden"))) {$(".dashboard").toggle();}
 }
 ;
-function showTeamPhoneNUmbersPage(numberOfTeams){
+function showTeamPhoneNumbersPage(data){
+
   $(".team_numbers").toggle();
-  for (var i = 0; i < numberOfTeams; i++) {
-    $("#team_phone_number_list").append("<li><label for='phone_number'>Team #</label><br><input name='phone_number' id='team" + [i] + "'data-hunt-id='" + currentHuntData.id + "'></input></li>");
+  for (var i = 0; i < data.number_of_teams; i++) {
+    $("#team_phone_number_list").append("<li><label for='phone_number'>Team #</label><br><input name='phone_number' id='team" + [i] + "'data-hunt-id='" + data.id + "'></input></li>");
   }
 };
 
@@ -18089,12 +18141,104 @@ function createTeams() {
 $(document).ready(function() {
   activateHunt();
   createTeams();
-  gatherCurrentHuntData();
-  gatherTeamData();
+  adminViewController();
+
+  teamViewsController();
+  teamWelcomeView();
 });
-                 
-function gatherTeamData() {
-  console.log("TEAM DATA")
+function teamViewsController(){
+  window.teamData = 'no data window';
+  setView();
+  setInterval(setView, 5000);
+};
+
+function setView() {
+  var slug     = getSlug();
+
+  $.ajax({
+    url: "/team_data/"+slug,
+    data: { 
+        "slug": slug 
+    },
+    type: "GET",
+    success: function(response) {
+      console.log(response);
+      console.log(teamData);
+      if(!(_.isEqual(response, teamData))){
+        resetTeamView();
+        toggleViews(response);  
+      };
+      teamData = _.clone(response);
+    },
+    error: function(xhr) {
+      console.log("no data error set View");
+    }
+  });
+
+};
+
+function toggleViews(currentTeamData){
+  if(currentTeamData.team_info.hunt_initiated === false){
+    $('.team_welcome').toggle();
+  } else if(currentTeamData.submission_info.responded_to === false){
+    $('.waiting').toggle();
+  } else {
+    $('.clue').toggle();
+  }
+};
+
+function resetTeamView(){
+  var welcomeView = $('.team_welcome'); 
+  var clueView    = $('.team_welcome');
+  var waitingView = $('.waiting');
+
+  if(!welcomeView.is(':hidden')){
+    welcomeView.toggle();
+  } else if(!clueView.is(':hidden')) {
+    clueView.toggle();
+  } else if(!waitingView.is(':hidden')){
+    waitingView.toggle();
+  } else {
+  };
+};
+
+function getSlug(){
+  var slug = _.last(document.URL.split('/')); 
+  return slug;
+}
+;
+function teamWelcomeView(){
+  startHunt();
+};
+
+function startHunt(){
+  $('#play_on_button').on('click', function(event){
+    event.preventDefault();    
+    updateTeamName();
+  });
+};
+
+function updateTeamName(){
+  var slug     = getSlug();
+  var teamName = $('#name_of_team').val();
+  if(teamName.length < 2){
+    teamName = "Team"+slug;
+  }
+
+  $.ajax({
+    url: "/teams/"+slug,
+    data: { 
+        "slug": slug,
+        "team": { "name": teamName, "hunt_initiated": true }
+    },
+    type: "PUT",
+    success: function(response) {
+      setView();
+    },
+    error: function(xhr) {
+      console.log("no data error update team");
+    }
+  });
 };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
