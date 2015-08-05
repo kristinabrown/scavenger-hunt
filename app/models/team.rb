@@ -12,7 +12,7 @@ class Team < ActiveRecord::Base
     message: 'Must start with 1', multiline: true }, length: { is: 11 }
 
   after_create      :set_locations_found
-  after_create      :set_start_location
+  after_create      :set_route
   before_validation :generate_starting_name
   before_validation :generate_slug
 
@@ -24,6 +24,29 @@ class Team < ActiveRecord::Base
     self.found_locations ||= 0
   end
 
+  def hunt_routes
+    { 1 => [1,2,3,4,5,6,7,8,9,10,11,12,13],
+      2 => [13,12,11,10,9,8,7,6,5,4,3,2,1],
+      3 => [3,4,5,6,7,8,9,10,11,12,13,1,2],
+      4 => [11,10,9,8,7,6,5,4,3,2,1,12,13],
+      5 => [5,6,7,8,9,10,11,12,13,1,2,3,4],
+      6 => [9,8,7,6,5,4,3,2,1,13,12,11,10],
+      7 => [7,8,9,10,11,12,13,1,2,3,4,5,6]
+    }
+  end
+
+  def set_route
+    taken_routes = Team.all.map {|team| team.route}
+    team_route = (1..7).to_a.sample
+
+    if taken_routes.include?(team_route)
+      set_route
+    else
+      self.update(route: team_route)
+      self.update(location_id: hunt_routes[self.route][0])
+    end
+  end
+
   def generate_starting_name
     self.name = "Team#{self.phone_number}"  if self.name.nil?
   end
@@ -32,23 +55,13 @@ class Team < ActiveRecord::Base
     self.slug = self.phone_number
   end
 
-  def set_start_location
-    self.update(location_id: Location.first.id)
+  def current_location
+    self.update(location_id: hunt_routes[self.route][self.found_locations])
   end
-
-  # def set_start_location
-  #   location_ids    = Location.all.map(&:id)
-  #   already_taken   = Hunt.find_by(id: self.hunt_id).teams.pluck(:location_id)
-  #   unique_start    = location_ids.sample
-  #   while already_taken.include?(unique_start)
-  #     unique_start = location_ids.sample
-  #   end
-  #   self.update(location_id: unique_start)
-  # end
 
   def data
     submission = self.submissions.last || OpenStruct.new(correct: false, responded_to: true, accepted: true)
-    
+
     { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated },
       location_info:   { found_locations: found_locations, location_id: location_id, location: self.location },
       submission_info: { correct: submission.correct, responded_to: submission.responded_to, accepted: submission.accepted }
