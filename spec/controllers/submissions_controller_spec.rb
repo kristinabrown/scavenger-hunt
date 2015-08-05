@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'json'
 
 RSpec.describe SubmissionsController, type: :controller do
-  
+
   let!(:location) { create(:location) }
   let!(:location_2) { create(:location_2) }
   let!(:location_3) { create(:location_3) }
@@ -42,17 +42,17 @@ RSpec.describe SubmissionsController, type: :controller do
       expect(data.last[:responded_to]).to be(false)
     end
   end
-  
+
   describe "PATCH#update" do
     it "updates a submission" do
       expect(submission_1.correct).to eq(false)
-      params = {submission_id: submission_1.id, correct: true}
+      params = {submission_id: submission_1.id, correct: true, id: submission_1.id}
       put :update, :id => submission_1.id, format: :json, submission: params
       submission_1 = Submission.find(10)
       expect(submission_1.correct).to eq(true)
     end
   end
-  
+
   describe "GET#latest_submission" do
     it "gets the teams latest submission when responded to" do
       params = { team_id: team.id }

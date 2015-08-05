@@ -11,8 +11,12 @@ class Hunt < ActiveRecord::Base
 
   def self.current_hunt_data
     current_hunt = Hunt.includes(:teams).last
+    submission_data = Hunt.last.teams.map {|team| team.submissions.select {|submission| submission.responded_to == false}}.flatten
     { id: current_hunt.id, name: current_hunt.name,
-      active: current_hunt.active, number_of_teams: current_hunt.number_of_teams, teams: current_hunt.teams }.to_json
+      active: current_hunt.active,
+      number_of_teams: current_hunt.number_of_teams,
+      teams: current_hunt.teams,
+      submissions: submission_data }.to_json
   end
 
 end
