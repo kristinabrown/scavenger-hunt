@@ -24,10 +24,14 @@ class TeamsController < ApplicationController
     respond_with Team.find_by!(slug: params[:slug]).data, location: nil
   end
 
+  def next_location
+    respond_with Team.find_by!(slug: params[:slug]).next_location(team_params[:correct]), location: nil
+  end
+
   private
 
   def team_params
-    params.require(:team).permit(:hunt_id, :location_id, :name, :phone_number, :found_locations, :hunt_initiated)
+    params.require(:team).permit(:hunt_id, :location_id, :name, :phone_number, :found_locations, :hunt_initiated, :correct)
   end
 
 end

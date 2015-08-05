@@ -81,4 +81,32 @@ RSpec.describe TeamsController, type: :controller do
     end
   end
 
+  describe "PUT #next_location" do
+    it "gets the next location" do
+      team1.update(location_id: Location.last.id)
+      old_location = team1.location_id
+      put :next_location, format: :json, slug: team1.slug, team: {correct: true}
+
+      new_location = Team.find(team1.id).location_id
+      expect(new_location).to eq(Location.first.id)
+    end
+
+    it "gets the next location" do
+      team1.update(location_id: Location.first.id)
+      old_location = team1.location_id
+      put :next_location, format: :json, slug: team1.slug, team: {correct: true}
+
+      new_location = Team.find(team1.id).location_id
+      expect(new_location).to eq(old_location+1)
+    end
+
+    it "does not set a new location if correct is false" do
+      old_location = team1.location_id
+      put :next_location, format: :json, slug: team1.slug, team: {correct: false}
+
+      new_location = Team.find(team1.id).location_id
+      expect(new_location).to eq(old_location)
+    end
+  end
+
 end
