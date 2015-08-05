@@ -18021,7 +18021,7 @@ function renderSubmission(submission){
                              "<div class='col s12 m9'>" +
                                "<div class='card'>" +
                                  "<div class='card-image hoverable'>" +
-                                 "<img src='assets/" + submission.attachment_url + "'>" +
+                                 "<img src='" + submission.attachment_url + "'>" +
                                  "</div>" +
                                    "<div class='card-content'>" +
                                      "<p>Location: " + submission.location_name + "</p>" +
