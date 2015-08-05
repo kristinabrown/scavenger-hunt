@@ -29,7 +29,6 @@ function setView() {
 
 function toggleViews(currentTeamData){
   var submission = currentTeamData.submission_info; 
-
   if(currentTeamData.team_info.hunt_initiated === false){
     $('.team_welcome').toggle();
   } else if(submission.responded_to && submission.accepted){
@@ -37,6 +36,7 @@ function toggleViews(currentTeamData){
   } else if(!submission.responded_to && !submission.accepted){
     $('.waiting').toggle();
   } else if(submission.responded_to && !submission.accepted){
+    console.log('hitting response view!!!');
     setResponseView(submission.correct, currentTeamData);
   } else {
     console.log('unregistered team client state');

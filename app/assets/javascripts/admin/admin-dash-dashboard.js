@@ -2,7 +2,6 @@ function showAdminDashboardPage(data) {
   $(".dashboard").toggle();
     $("#submissions").empty();
     $(".standings_list").empty();
-    debugger;
   for (var i = 0; i < data.teams.length; i++) {
     $(".standings_list").append("<tr><td>" + data.teams[i].team.name + "</td><td>" + data.teams[i].location_name + "</td><td>" + data.teams[i].team.found_locations + "</td></tr>");
   }
