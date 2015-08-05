@@ -26,6 +26,7 @@
 
   <!-- clue -->
   <div class="clue hidden">
+    <h3 class="team_name_clue_page"></h3>
     <h3>Clue:</h3>
     <p class="clue_info"><%#= Location.find(@team.location_id).clues.first.info %></p>
     <%= form_tag("/submissions", multipart: true) do %>
@@ -65,8 +66,14 @@
 
   <!-- submission response -->
   <div class="submission_response hidden">
-    <h1>RESPONSE!!!</h1>
-    
+    <div class='success_response hidden'>
+      <p id='success_response_message'>Correct! Go on to the next location.</p>
+      <button class="btn waves-effect waves-light" id="success_response_button" type="submit">Next Clue</button>
+    </div>
+    <div class='failure_response hidden'>
+      <p id='failure_response_message'>Not quite right, try again!</p>
+      <button class="btn waves-effect waves-light" id="failure_response_button" type="submit">Try Again</button>
+    </div>
   </div>
 </div>
 
