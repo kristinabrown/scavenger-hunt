@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804215852) do
+ActiveRecord::Schema.define(version: 20150805032559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150804215852) do
     t.integer "found_locations", default: 0
     t.integer "location_id"
     t.boolean "hunt_initiated",  default: false
+    t.integer "route"
   end
 
   add_index "teams", ["hunt_id"], name: "index_teams_on_hunt_id", using: :btree

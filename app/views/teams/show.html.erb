@@ -33,7 +33,7 @@
       <%= file_field_tag :attachment, {capture: "camera", accept: "image/*"}%>
       <%= hidden_field_tag :team_id, @team.id %>
       <%= hidden_field_tag :location_id, @team.location_id %>
-      <%= submit_tag "Send Picture" %>
+      <%= submit_tag "Send Picture", id: "send_picture" %>
     <% end %>
     <!-- <form accept-charset="UTF-8" action="/submissions" method="post" enctype="multipart/form-data">
     <input type="file" value="Take Picture" capture="camera" id="takePictureField">
@@ -76,4 +76,3 @@
     </div>
   </div>
 </div>
-
