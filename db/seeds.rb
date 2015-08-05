@@ -48,6 +48,13 @@ class Seed
       Submission.create(correct: correct_bool, team_id: team.id, location_id: team.location_id, responded_to: responded_bool)
     end
     puts "Submissions generated."
+    set_last_submissions
+  end
+
+  def self.set_last_submissions
+    Team.all.each do |team|
+      team.submissions.last.update(accepted: true, responded_to: true, correct: false)
+    end
   end
 
   def self.generate_hunts

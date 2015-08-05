@@ -28,6 +28,10 @@ class SubmissionsController < ApplicationController
     team = Team.find(params[:team_id][:team_id])
     respond_with team.submissions.where(correct: true).last
   end
+
+  def update_accept
+    respond_with Team.find_by!(slug: params[:slug]).submissions.last.update(accepted: true)
+  end
   
   private
   

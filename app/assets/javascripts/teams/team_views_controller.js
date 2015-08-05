@@ -1,5 +1,5 @@
 function teamViewsController(){
-  window.teamData = 'no data window';
+  window.teamData = "data placeholder";
   setView();
   setInterval(setView, 5000);
 };
@@ -14,13 +14,11 @@ function setView() {
     },
     type: "GET",
     success: function(response) {
-      console.log(response);
-      console.log(teamData);
       if(!(_.isEqual(response, teamData))){
-        resetTeamView();
+        resetAllViews();
         toggleViews(response);  
       };
-      teamData = _.clone(response);
+      teamData = jQuery.extend(true, {}, response);
     },
     error: function(xhr) {
       console.log("no data error set View");
@@ -30,28 +28,27 @@ function setView() {
 };
 
 function toggleViews(currentTeamData){
+  var submission = currentTeamData.submission_info; 
+
   if(currentTeamData.team_info.hunt_initiated === false){
     $('.team_welcome').toggle();
-  } else if(currentTeamData.submission_info.responded_to === false){
+  } else if(submission.responded_to && submission.accepted){
+    setClueView(currentTeamData);
+  } else if(!submission.responded_to && !submission.accepted){
     $('.waiting').toggle();
+  } else if(submission.responded_to && !submission.accepted){
+    setResponseView(submission.correct, currentTeamData);
   } else {
-    $('.clue').toggle();
-  }
+    console.log('unregistered team client state');
+  };
 };
 
-function resetTeamView(){
-  var welcomeView = $('.team_welcome'); 
-  var clueView    = $('.team_welcome');
-  var waitingView = $('.waiting');
-
-  if(!welcomeView.is(':hidden')){
-    welcomeView.toggle();
-  } else if(!clueView.is(':hidden')) {
-    clueView.toggle();
-  } else if(!waitingView.is(':hidden')){
-    waitingView.toggle();
-  } else {
-  };
+function resetAllViews(){
+  var views = [$('.team_welcome'), $('.team_welcome'), $('.waiting'), $('.submission_response'), $('.success_response'), $('.failure_response')];
+  
+  views.forEach(function(view){
+    if(!view.is(':hidden')){ view.toggle() };
+  });
 };
 
 function getSlug(){
