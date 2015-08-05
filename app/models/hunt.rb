@@ -15,16 +15,23 @@ class Hunt < ActiveRecord::Base
     { id: current_hunt.id, name: current_hunt.name,
       active: current_hunt.active,
       number_of_teams: current_hunt.number_of_teams,
-      teams: current_hunt.teams,
-      submissions: broken_up_data(submission_data) }.to_json
+      teams:  broken_up_team_data(current_hunt.teams),
+      submissions: broken_up_data_submission(submission_data) }.to_json
   end
   
-  def self.broken_up_data(submissions)
+  def self.broken_up_data_submission(submissions)
     submissions.map do |s|
       {data: s, 
        location_name: Location.find(s.location_id).name, 
        team_name: Team.find(s.team_id).name,
        attachment_url: Submission.find(s.id).attachment.url }
+    end
+  end
+  
+  def self.broken_up_team_data(teams)
+    teams.map do |t|
+      {team: t, 
+       location_name: Location.find(t.location_id).name }
     end
   end
 
