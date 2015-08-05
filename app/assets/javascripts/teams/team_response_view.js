@@ -31,6 +31,7 @@ function nextClue(){
 };
 
 function setResponseView(isClueCorrect, currentTeamData){
+  console.log('hitting response view!!! ajax');
   var slug = getSlug();
   tryAgain();
   nextClue();

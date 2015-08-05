@@ -18007,8 +18007,9 @@ function showAdminDashboardPage(data) {
   $(".dashboard").toggle();
     $("#submissions").empty();
     $(".standings_list").empty();
+    debugger;
   for (var i = 0; i < data.teams.length; i++) {
-    $(".standings_list").append("<tr><td>" + data.teams[i].name + "</td><td>" + data.teams[i].location_id + "</td><td>" + data.teams[i].found_locations + "</td></tr>");
+    $(".standings_list").append("<tr><td>" + data.teams[i].team.name + "</td><td>" + data.teams[i].location_name + "</td><td>" + data.teams[i].team.found_locations + "</td></tr>");
   }
     var submissions = data.submissions;
     var renderedSubmissions = submissions.map(renderSubmission);
@@ -18037,7 +18038,6 @@ function renderSubmission(submission){
 
 function bindUpdateSubmissonEvent(submission){
   $(submission).find(".incorrect").on("click", function() {
-    console.log("incorrect")
     var $submission = $(this).parents(".row")
     var id = $submission.data("id")
     $.ajax({
@@ -18052,7 +18052,6 @@ function bindUpdateSubmissonEvent(submission){
     })
   })
   $(submission).find(".correct").on("click", function() {
-    console.log("correct")
     var $submission = $(this).parents(".row")
     var id = $submission.data("id")
     $.ajax({
@@ -18075,7 +18074,7 @@ function showNewHuntPage() {
 function activateHunt() {
   $("#new_hunt_button").on("click", function(event){
     event.preventDefault();
-
+    console.log("win");
     var number_of_teams = $("#number_of_teams").val()
     var name_of_hunt = $("#name_of_hunt").val()
     var data = {hunt: {number_of_teams: number_of_teams, name: name_of_hunt }}
@@ -18147,7 +18146,7 @@ $(document).ready(function() {
   teamWelcomeView();
 });
 function setClueView(teamData){
-  var clue = $('.clue_info')[0]; 
+  var clue = $('.clue_info')[0];
   clue.innerHTML = "";
   clue.innerHTML = teamData.location_info.clue;
 
@@ -18156,7 +18155,17 @@ function setClueView(teamData){
   name.innerHTML = teamData.team_info.name;
 
   $('.clue').toggle();
+
+  hideClueViewOnClick();
 };
+
+
+function hideClueViewOnClick() {
+  $("#send_picture").on("click", function() {
+    $('.clue').toggle();
+  });
+}
+;
 function updateAccept(){
   var slug = getSlug();
 
