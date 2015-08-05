@@ -63,9 +63,19 @@ class Team < ActiveRecord::Base
     submission = self.submissions.last || OpenStruct.new(correct: false, responded_to: true, accepted: true)
 
     { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated },
-      location_info:   { found_locations: found_locations, location_id: location_id, location: self.location },
+      location_info:   { found_locations: found_locations, location_id: location_id, location: self.location, clue: self.location.name },
       submission_info: { correct: submission.correct, responded_to: submission.responded_to, accepted: submission.accepted }
     }.to_json
+  end
+
+  def next_location(correct)
+    set_next_location if correct == "true"
+  end
+
+  def set_next_location
+    locations = Location.all
+    location_id == locations.last.id ? (new_id = locations.first.id) : (new_id = location_id + 1)
+    self.update(location_id: new_id)
   end
 
   def self.on_current_hunt(hunt_id)

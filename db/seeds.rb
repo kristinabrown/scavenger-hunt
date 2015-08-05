@@ -41,6 +41,22 @@ class Seed
     puts "Team generated."
   end
 
+  def self.generate_submissions
+    Team.all.each do |team|
+      correct_bool = [true, false].sample
+      responded_bool = [true, false].sample
+      Submission.create(correct: correct_bool, team_id: team.id, location_id: team.location_id, responded_to: responded_bool)
+    end
+    puts "Submissions generated."
+    set_last_submissions
+  end
+
+  def self.set_last_submissions
+    Team.all.each do |team|
+      team.submissions.last.update(accepted: true, responded_to: true, correct: false)
+    end
+  end
+
   def self.generate_hunts
     old_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3, active: false)
     3.times { generate_team(old_hunt.id) }

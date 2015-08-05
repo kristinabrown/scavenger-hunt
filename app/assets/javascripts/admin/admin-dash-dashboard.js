@@ -12,14 +12,15 @@ function showAdminDashboardPage(data) {
   }
 
 function renderSubmission(submission){
-  return $("<div class='row' data-id='" + submission.id + "'>" +
+  return $("<div class='row' data-id='" + submission.data.id + "'>" +
                              "<div class='col s12 m9'>" +
                                "<div class='card'>" +
                                  "<div class='card-image hoverable'>" +
-                                  //  "<img src='" + submission.attachment.url + "'>" +
+                                 "<img src='" + submission.attachment_url + "'>" +
                                  "</div>" +
                                    "<div class='card-content'>" +
-                                     "<p>" + submission.location_id + "</p>" + // change to be location name
+                                     "<p>Location: " + submission.location_name + "</p>" +
+                                      "<p>Team: " + submission.team_name + "</p>" +
                                    "</div>" +
                                    "<div class='card-action center-align '><a class='btn-floating btn-large waves-effect waves-light red incorrect'><i class='material-icons'>BOO</i></a>" +
                                    "<a class='btn-floating btn-large waves-effect waves-light green correct'><i class='material-icons'>Ya!</i></a>" +
