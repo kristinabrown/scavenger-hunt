@@ -11,7 +11,20 @@ class Seed
   def self.development
     generate_locations
     generate_hunts
+    generate_last_team(Hunt.last.id)
     generate_submissions
+    generate_admin
+  end
+
+  def self.generate_admin
+    p "admin created"
+    Admin.create!(name: "Raissa", phone: "555-555-5555", password: "password")
+  end
+
+  def self.generate_last_team(hunt_id)
+    p "last_team generated"
+    Team.create!(phone_number: 11111111111, hunt_id: hunt_id)
+    #code
   end
 
   def self.generate_locations
@@ -60,7 +73,7 @@ class Seed
   def self.generate_hunts
     old_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3, active: false)
     3.times { generate_team(old_hunt.id) }
-    new_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3)
+    new_hunt = Hunt.create(name: Faker::Lorem.word, number_of_teams: 3, active: false)
     3.times { generate_team(new_hunt.id) }
     puts "Hunts generated."
   end

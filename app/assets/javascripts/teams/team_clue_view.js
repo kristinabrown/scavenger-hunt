@@ -1,5 +1,5 @@
 function setClueView(teamData){
-  var clue = $('.clue_info')[0]; 
+  var clue = $('.clue_info')[0];
   clue.innerHTML = "";
   clue.innerHTML = teamData.location_info.clue;
 
@@ -8,4 +8,13 @@ function setClueView(teamData){
   name.innerHTML = teamData.team_info.name;
 
   $('.clue').toggle();
+
+  hideClueViewOnClick();
 };
+
+
+function hideClueViewOnClick() {
+  $("#send_picture").on("click", function() {
+    $('.clue').toggle();
+  });
+}

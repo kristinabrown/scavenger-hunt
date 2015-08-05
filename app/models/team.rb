@@ -36,12 +36,15 @@ class Team < ActiveRecord::Base
   end
 
   def set_route
-    taken_routes = Team.all.map {|team| team.route}
+p "set route"
+    taken_routes = Hunt.last.teams.map {|team| team.route}
+    p taken_routes
     team_route = (1..7).to_a.sample
-
+    p team_route
     if taken_routes.include?(team_route)
       set_route
     else
+      p "else"
       self.update(route: team_route)
       self.update(location_id: hunt_routes[self.route][0])
     end
@@ -63,7 +66,7 @@ class Team < ActiveRecord::Base
     submission = self.submissions.last || OpenStruct.new(correct: false, responded_to: true, accepted: true)
 
     { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated },
-      location_info:   { found_locations: found_locations, location_id: location_id, location: self.location, clue: self.location.name },
+      location_info:   { found_locations: found_locations, location_id: location_id, location: self.location, clue: self.location.clues.first.info },
       submission_info: { correct: submission.correct, responded_to: submission.responded_to, accepted: submission.accepted }
     }.to_json
   end
@@ -73,9 +76,9 @@ class Team < ActiveRecord::Base
   end
 
   def set_next_location
-    locations = Location.all
-    location_id == locations.last.id ? (new_id = locations.first.id) : (new_id = location_id + 1)
-    self.update(location_id: new_id)
+    new_id = hunt_routes[self.route][self.locations_found]
+    self.update(location_id: new_id, found_locations: self.found_locations += 1)
+
   end
 
   def self.on_current_hunt(hunt_id)
