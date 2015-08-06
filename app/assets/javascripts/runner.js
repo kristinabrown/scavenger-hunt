@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  endGame();
   activateHunt();
   createTeams();
   adminViewController();

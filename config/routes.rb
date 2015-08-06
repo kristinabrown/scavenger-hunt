@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   put '/next_location/:slug', to: 'teams#next_location'
   get '/team_data/:slug',     to: 'teams#team_data'
 
-  resources :hunts, only: [:create, :destroy, :index]
+  resources :hunts, only: [:create, :index]
+  delete '/end_hunt', to: 'hunts#destroy'
   
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

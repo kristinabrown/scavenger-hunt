@@ -41,7 +41,8 @@ class Seed
                  {name: "My Brother’s Bar", clue: "This place claims it is the oldest continuously operating bar in Denver, dating to 1871. Beatniks Jack Kerouac and Neal Cassady used to drink here, and a letter written by Mr. Cassady hangs on the wall. Tell us what the letter requests."},
                  {name: "Millennium Bridge", clue: "This steel marvel will take you back to the millennium. Climb the stairs and photograph your team near the 200 foot mast of this suspension footbridge, the first in the world to use post-tensioned structural construction."},
                  {name: "Toxic Schizophrenia sculpture outside Museum of Contemporary Art", clue: "Tim and Sue brought their Toxic Schizophrenia all the way from the UK. They bear their bloody heart for all to see. Find it and photograph it."},
-                 {name: "National Velvet Sculpture", clue: "Commissioned by the Denver Office of Cultural Affairs, National Velvet may not be as disturbing as Blue Velvet, but it has surely elicited some calls to the mayor's office. Photograph your teammates with this one of a kind sculpture."}
+                 {name: "National Velvet Sculpture", clue: "Commissioned by the Denver Office of Cultural Affairs, National Velvet may not be as disturbing as Blue Velvet, but it has surely elicited some calls to the mayor's office. Photograph your teammates with this one of a kind sculpture."},
+                 {name: "Turing School of Software and Design", clue: "Good work! The hunt is over, so head back to the dungeon for a sweet nacho bar."}
                 ]
     locations.each do |location|
       new_location = Location.create(name: location[:name])
