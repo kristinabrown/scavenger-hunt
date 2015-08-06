@@ -6,6 +6,7 @@ class Hunt < ActiveRecord::Base
   validates :number_of_teams, presence: true
 
   def self.end_game(id)
+    Team.where(hunt_over: false).each { |team| team.update(hunt_over: true) }
     Hunt.find(id).update(active: false)
   end
 

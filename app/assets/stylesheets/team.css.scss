@@ -1,7 +1,111 @@
+
+// ------------welcome page---------
+
+.mobile-font {
+  font-size: 16px;
+}
+
+#welcome-team-header {
+  margin-bottom: 50px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+}
+
+#name-form {
+  margin-top: 120px;
+}
+
+#name_of_team{
+  font-size: 2.5em;    
+}
+
+#play_on_button {
+  min-width: 250px;
+  min-height: 100px;
+  font-size: 2em;
+}
+
+#name-form-label {
+  font-size: 3.5em;  
+}
+
+// -----------clue page-------------
+
+.team_name_clue_page {
+  margin-bottom: 80px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-size: 100px;
+}
+
+#clue-header {
+  font-size: 4em;
+  font-weight: bold;
+  color: rgb(14, 110, 98);
+}
+
+.mobile-font-clue {
+  font-size: 50px;
+}
+
+#send_picture {
+  background-color: rgba(9, 149, 141, 0.98);
+  min-width: 250px;
+  min-height: 100px;
+  font-size: 2em;
+  color: white;
+}
+
+#camera {
+  min-width: 250px;
+  min-height: 100px;
+  font-size: 1.5em;
+}
+
+// -----------response page -------------
+
+#success_response_button {
+  min-width: 350px;
+  min-height: 180px;
+  font-size: 3.5em;
+}
+
+#failure_response_button {
+  min-width: 350px;
+  min-height: 180px;
+  font-size: 3.5em;
+}
+
+// ------------spinner-------------
+
 .waiting {
   margin-top: 50%;
 }
 
 #turing_spinner {
-  width: 100px;
+  width: 500px;
+}
+
+// ----------------nacho screen ----------------------
+
+#nacho-header {
+  margin-bottom: 80px;
+  background-color: rgb(185, 20, 89);
+  color: white;
+  padding: 40px;
+  font-size: 100px;
+}
+
+.nacho-p {
+  // background-color: rgb(34, 178, 198);
+  color: rgb(20, 191, 109);
+  padding: 7px;
+}
+
+#nacho-gif {
+  margin-top: 200px;
+  margin-left: 0px;
+  width: 100%;
 }

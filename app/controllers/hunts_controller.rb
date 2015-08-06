@@ -12,7 +12,7 @@ class HuntsController < ApplicationController
   end
 
   def destroy
-    respond_with Hunt.end_game(params[:id])
+    respond_with Hunt.end_game(Hunt.last.id), location: nil
   end
 
   private

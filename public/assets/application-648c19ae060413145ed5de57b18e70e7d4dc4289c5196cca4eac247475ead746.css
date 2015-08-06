@@ -69,9 +69,122 @@
   background-color: #0d740a;
   color: white;
 }
-/* line 1, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+/* line 4, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+.mobile-font {
+  font-size: 16px;
+}
+
+/* line 8, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#welcome-team-header {
+  margin-bottom: 50px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+}
+
+/* line 15, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#name-form {
+  margin-top: 120px;
+}
+
+/* line 19, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#name_of_team {
+  font-size: 2.5em;
+}
+
+/* line 23, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#play_on_button {
+  min-width: 250px;
+  min-height: 100px;
+  font-size: 2em;
+}
+
+/* line 29, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#name-form-label {
+  font-size: 3.5em;
+}
+
+/* line 35, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+.team_name_clue_page {
+  margin-bottom: 80px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-size: 100px;
+}
+
+/* line 43, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#clue-header {
+  font-size: 4em;
+  font-weight: bold;
+  color: #0e6e62;
+}
+
+/* line 49, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+.mobile-font-clue {
+  font-size: 50px;
+}
+
+/* line 53, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#send_picture {
+  background-color: rgba(9, 149, 141, 0.98);
+  min-width: 250px;
+  min-height: 100px;
+  font-size: 2em;
+  color: white;
+}
+
+/* line 61, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#camera {
+  min-width: 250px;
+  min-height: 100px;
+  font-size: 1.5em;
+}
+
+/* line 69, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#success_response_button {
+  min-width: 350px;
+  min-height: 180px;
+  font-size: 3.5em;
+}
+
+/* line 75, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#failure_response_button {
+  min-width: 350px;
+  min-height: 180px;
+  font-size: 3.5em;
+}
+
+/* line 83, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
 .waiting {
   margin-top: 50%;
+}
+
+/* line 87, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#turing_spinner {
+  width: 500px;
+}
+
+/* line 93, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#nacho-header {
+  margin-bottom: 80px;
+  background-color: #b91459;
+  color: white;
+  padding: 40px;
+  font-size: 100px;
+}
+
+/* line 101, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+.nacho-p {
+  color: #14bf6d;
+  padding: 7px;
+}
+
+/* line 107, /Users/kristinabrown/Turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
+#nacho-gif {
+  margin-top: 200px;
+  margin-left: 0px;
+  width: 100%;
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
