@@ -36,7 +36,6 @@ class Team < ActiveRecord::Base
   end
 
   def set_route
-p "set route"
     taken_routes = Hunt.last.teams.map {|team| team.route}
     p taken_routes
     team_route = (1..7).to_a.sample
@@ -44,7 +43,6 @@ p "set route"
     if taken_routes.include?(team_route)
       set_route
     else
-      p "else"
       self.update(route: team_route)
       self.update(location_id: hunt_routes[self.route][0])
     end
