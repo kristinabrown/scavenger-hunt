@@ -65,7 +65,7 @@ p "set route"
   def data
     submission = self.submissions.last || OpenStruct.new(correct: false, responded_to: true, accepted: true)
 
-    { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated },
+    { team_info:       { id: id, name: name, hunt_id: hunt_id, slug: slug, phone_number: phone_number, hunt_initiated:  hunt_initiated, hunt_over: hunt_over },
       location_info:   { found_locations: found_locations, location_id: location_id, location: self.location, clue: self.location.clues.first.info },
       submission_info: { correct: submission.correct, responded_to: submission.responded_to, accepted: submission.accepted }
     }.to_json
@@ -79,7 +79,12 @@ p "set route"
     new_id = hunt_routes[self.route][self.found_locations]
     new_found = self.found_locations + 1
     self.update(location_id: new_id, found_locations: new_found)
+    check_to_see_if_the_hunt_is_over
   end
+
+  def check_to_see_if_the_hunt_is_over
+    self.update(hunt_over: true) if location_id == 14
+  end 
 
   def self.on_current_hunt(hunt_id)
     self.joins(:hunt).where(hunt_id: hunt_id)

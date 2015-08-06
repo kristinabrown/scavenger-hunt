@@ -32,7 +32,7 @@ function toggleViews(currentTeamData){
   var submission = currentTeamData.submission_info; 
   if(currentTeamData.team_info.hunt_initiated === false){
     $('.team_welcome').toggle();
-  } else if(currentTeamData.location_info.location_id == "14"){
+  } else if(currentTeamData.team_info.hunt_over === true){
     $('.winning-condition').toggle();
   } else if(submission.responded_to && submission.accepted){
     setClueView(currentTeamData);
@@ -61,8 +61,8 @@ function getSlug(){
 
 function compareResponseForChanges(newData, oldData){
   if(oldData === "initialize"){ return true };
-  var newDataMash = newData.location_info.location_id+":"+newData.team_info.hunt_initiated +":"+ newData.submission_info.responded_to +":"+ newData.submission_info.accepted;
-  var oldDataMash = oldData.location_info.location_id+":"+oldData.team_info.hunt_initiated +":"+ oldData.submission_info.responded_to +":"+ oldData.submission_info.accepted;
+  var newDataMash = newData.team_info.hunt_over+":"+newData.team_info.hunt_initiated +":"+ newData.submission_info.responded_to +":"+ newData.submission_info.accepted;
+  var oldDataMash = oldData.team_info.hunt_over+":"+oldData.team_info.hunt_initiated +":"+ oldData.submission_info.responded_to +":"+ oldData.submission_info.accepted;
   var areNewDataAndOldDataTheSame = _.isEqual(newDataMash, oldDataMash);
   return !areNewDataAndOldDataTheSame;
 };
