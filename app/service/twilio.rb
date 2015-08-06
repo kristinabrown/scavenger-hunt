@@ -3,13 +3,10 @@ class Messenger
   attr_reader :client
 
   def initialize
-    @client = Twilio::REST::Client.new account_sid, auth_token
+    @client = Twilio::REST::Client.new ENV["twilio_sid"], ENV["twilio_auth_token"]
   end
 
   def send(number)
-
-    account_sid = ENV["twilio_sid"]
-    auth_token = ENV["twilio_auth_token"]
 
     from = "+13036225805" # Your Twilio number. Will change per account
 
