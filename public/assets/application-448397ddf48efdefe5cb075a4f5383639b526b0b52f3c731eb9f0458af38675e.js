@@ -18007,7 +18007,6 @@ function showAdminDashboardPage(data) {
   $(".dashboard").toggle();
     $("#submissions").empty();
     $(".standings_list").empty();
-    debugger;
   for (var i = 0; i < data.teams.length; i++) {
     $(".standings_list").append("<tr><td>" + data.teams[i].team.name + "</td><td>" + data.teams[i].location_name + "</td><td>" + data.teams[i].team.found_locations + "</td></tr>");
   }
@@ -18144,6 +18143,14 @@ $(document).ready(function() {
 
   teamViewsController();
   teamWelcomeView();
+  
+  setTimeout(function(){ 
+    $('#flash_errors').remove(); 
+  }, 3000);
+
+  setTimeout(function(){ 
+    $('#flash_notice').remove(); 
+  }, 3000);
 });
 function setClueView(teamData){
   var clue = $('.clue_info')[0];
@@ -18199,6 +18206,7 @@ function nextClue(){
 };
 
 function setResponseView(isClueCorrect, currentTeamData){
+  console.log('hitting response view!!! ajax');
   var slug = getSlug();
   tryAgain();
   nextClue();
@@ -18251,7 +18259,6 @@ function setView() {
 
 function toggleViews(currentTeamData){
   var submission = currentTeamData.submission_info; 
-
   if(currentTeamData.team_info.hunt_initiated === false){
     $('.team_welcome').toggle();
   } else if(submission.responded_to && submission.accepted){
@@ -18259,6 +18266,7 @@ function toggleViews(currentTeamData){
   } else if(!submission.responded_to && !submission.accepted){
     $('.waiting').toggle();
   } else if(submission.responded_to && !submission.accepted){
+    console.log('hitting response view!!!');
     setResponseView(submission.correct, currentTeamData);
   } else {
     console.log('unregistered team client state');

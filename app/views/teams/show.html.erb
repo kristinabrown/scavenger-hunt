@@ -3,21 +3,31 @@
   <!-- welcome -->
   <div class="team_welcome hidden">
     <div class="welcome_message">
-      <h3>Welcome to the Turing Scavenger Hunt!</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h3 class="center" id="welcome-team-header">Welcome to the Turing Scavenger Hunt!</h3>
+      <p class="mobile-font">Before you get to a-huntin' your team needs to choose a cool name, you'll enter that below. 
+      Once you get that figured out the hunt will begin!</p>
+      <p class="mobile-font">The scavenger hunt goes like this:</p>
+      <ol class="mobile-font">
+        <li>Get a clue.</li>
+        <li>Go to the place the clue is referring to.</li>
+        <li>Take a picture and submit it.</li>
+        <li>Wait for the scavenger hunt master to approve or disapprove.</li>
+      </ol>
+        <p class="mobile-font">If your submission is approved you will be given the next clue, and if it is rejected, do better!</p>
     </div>
-    <h5>Create a Team Name:</h5>
-    <div class="row">
-      <form class="col s12">
+    <!-- <h5 id="name-form-header">Create a Team Name:</h5> -->
+    
+    <div class="row" id="name-form">
+      <form class="col s12 m12 612">
         <div class="row">
           <div class="input-field col s12">
             <input id="name_of_team" type="text" class="validate" placeholder=<%= @team.name %>>
-            <label for="text">Team Name</label>
+            <label for="text" id="name-form-label">Team Name</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s5">
-            <button class="btn waves-effect waves-light" id="play_on_button" type="submit">Go!</button>
+            <button class="btn waves-effect waves-light btn-large" id="play_on_button" type="submit">Go!</button>
           </div>
         </div>
       </form>
@@ -26,24 +36,15 @@
 
   <!-- clue -->
   <div class="clue hidden">
-    <h3 class="team_name_clue_page"></h3>
-    <h3>Clue:</h3>
-    <p class="clue_info"><%#= Location.find(@team.location_id).clues.first.info %></p>
+    <h3 class="team_name_clue_page center"></h3>
+    <h3 id="clue-header">Clue:</h3>
+    <p class="clue_info mobile-font-clue"></p>
     <%= form_tag("/submissions", multipart: true) do %>
-      <%= file_field_tag :attachment, {capture: "camera", accept: "image/*"}%>
+      <%= file_field_tag :attachment, {capture: "camera", accept: "image/*", id: "camera"}%>
       <%= hidden_field_tag :team_id, @team.id %>
       <%= hidden_field_tag :location_id, @team.location_id %>
       <%= submit_tag "Send Picture", id: "send_picture" %>
     <% end %>
-    <!-- <form accept-charset="UTF-8" action="/submissions" method="post" enctype="multipart/form-data">
-    <input type="file" value="Take Picture" capture="camera" id="takePictureField">
-    <div class="row">
-      <div class="input-field col s5">
-         <input name="picture" type="submit" value="Take Picture" /> -->
-        <!-- <button class="btn waves-effect waves-light" id="play_on_button" type="submit" name="action">Submit Picture</button> -->
-      <!-- </div>
-    </div>
-  </form> -->
 
   <!-- picture -->
   <img id="current_image">
@@ -62,18 +63,28 @@
         </div>
       </div> -->
     <!-- </div> -->
-    <p>waiting...</p>
+    <p class="mobile-font-clue">waiting...</p>
   </div>
 
   <!-- submission response -->
   <div class="submission_response hidden">
     <div class='success_response hidden'>
-      <p id='success_response_message'>Correct! Go on to the next location.</p>
-      <button class="btn waves-effect waves-light" id="success_response_button" type="submit">Next Clue</button>
+      <p id='success_response_message' class="mobile-font-clue">Correct! Go on to the next location.</p>
+      <button class="btn waves-effect waves-light center-align" id="success_response_button" type="submit">Next Clue</button>
     </div>
     <div class='failure_response hidden'>
-      <p id='failure_response_message'>Not quite right, try again!</p>
+      <p id='failure_response_message' class="mobile-font-clue">Not quite right, try again!</p>
       <button class="btn waves-effect waves-light" id="failure_response_button" type="submit">Try Again</button>
     </div>
   </div>
+
+
+<!-- nacho screen -->
+
+  <div class="winning-condition hidden">
+    <h1 class="center" id="nacho-header"> HEY! </h1>
+    <p class="mobile-font-clue"> The Hunt is over. You all did a great job. Now <strong>get back to Turing</strong> and let's <strong class="nacho-p">eat nachos!</strong></p>
+    <%= image_tag("adventuretime-nachos.gif", id: "nacho-gif") %>
+  </div>
+  
 </div>
