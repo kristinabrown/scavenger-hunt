@@ -74,8 +74,9 @@ class Team < ActiveRecord::Base
   end
 
   def set_next_location
-    new_id = hunt_routes[self.route][self.locations_found]
-    self.update(location_id: new_id, found_locations: self.found_locations += 1)
+    new_id = hunt_routes[self.route][self.found_locations]
+    new_found = self.found_locations + 1
+    self.update(location_id: new_id, found_locations: new_found)
   end
 
   def self.on_current_hunt(hunt_id)

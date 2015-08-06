@@ -6,6 +6,7 @@ class Seed
 
   def self.production
     generate_locations
+    generate_admin
   end
 
   def self.development

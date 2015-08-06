@@ -3,7 +3,7 @@ function showAdminDashboardPage(data) {
     $("#submissions").empty();
     $(".standings_list").empty();
   for (var i = 0; i < data.teams.length; i++) {
-    $(".standings_list").append("<tr><td>" + data.teams[i].name + "</td><td>" + data.teams[i].location_id + "</td><td>" + data.teams[i].found_locations + "</td></tr>");
+    $(".standings_list").append("<tr><td>" + data.teams[i].team.name + "</td><td>" + data.teams[i].location_name + "</td><td>" + data.teams[i].team.found_locations + "</td></tr>");
   }
     var submissions = data.submissions;
     var renderedSubmissions = submissions.map(renderSubmission);
@@ -32,7 +32,6 @@ function renderSubmission(submission){
 
 function bindUpdateSubmissonEvent(submission){
   $(submission).find(".incorrect").on("click", function() {
-    console.log("incorrect")
     var $submission = $(this).parents(".row")
     var id = $submission.data("id")
     $.ajax({
@@ -47,7 +46,6 @@ function bindUpdateSubmissonEvent(submission){
     })
   })
   $(submission).find(".correct").on("click", function() {
-    console.log("correct")
     var $submission = $(this).parents(".row")
     var id = $submission.data("id")
     $.ajax({

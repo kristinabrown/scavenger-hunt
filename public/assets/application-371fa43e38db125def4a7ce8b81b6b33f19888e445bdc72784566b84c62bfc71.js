@@ -18007,8 +18007,9 @@ function showAdminDashboardPage(data) {
   $(".dashboard").toggle();
     $("#submissions").empty();
     $(".standings_list").empty();
+    debugger;
   for (var i = 0; i < data.teams.length; i++) {
-    $(".standings_list").append("<tr><td>" + data.teams[i].name + "</td><td>" + data.teams[i].location_id + "</td><td>" + data.teams[i].found_locations + "</td></tr>");
+    $(".standings_list").append("<tr><td>" + data.teams[i].team.name + "</td><td>" + data.teams[i].location_name + "</td><td>" + data.teams[i].team.found_locations + "</td></tr>");
   }
     var submissions = data.submissions;
     var renderedSubmissions = submissions.map(renderSubmission);
@@ -18021,7 +18022,7 @@ function renderSubmission(submission){
                              "<div class='col s12 m9'>" +
                                "<div class='card'>" +
                                  "<div class='card-image hoverable'>" +
-                                 "<img src='assets/" + submission.attachment_url + "'>" +
+                                 "<img src='" + submission.attachment_url + "'>" +
                                  "</div>" +
                                    "<div class='card-content'>" +
                                      "<p>Location: " + submission.location_name + "</p>" +
@@ -18037,7 +18038,6 @@ function renderSubmission(submission){
 
 function bindUpdateSubmissonEvent(submission){
   $(submission).find(".incorrect").on("click", function() {
-    console.log("incorrect")
     var $submission = $(this).parents(".row")
     var id = $submission.data("id")
     $.ajax({
@@ -18052,7 +18052,6 @@ function bindUpdateSubmissonEvent(submission){
     })
   })
   $(submission).find(".correct").on("click", function() {
-    console.log("correct")
     var $submission = $(this).parents(".row")
     var id = $submission.data("id")
     $.ajax({
@@ -18075,7 +18074,7 @@ function showNewHuntPage() {
 function activateHunt() {
   $("#new_hunt_button").on("click", function(event){
     event.preventDefault();
-
+    console.log("win");
     var number_of_teams = $("#number_of_teams").val()
     var name_of_hunt = $("#name_of_hunt").val()
     var data = {hunt: {number_of_teams: number_of_teams, name: name_of_hunt }}
@@ -18146,8 +18145,83 @@ $(document).ready(function() {
   teamViewsController();
   teamWelcomeView();
 });
+function setClueView(teamData){
+  var clue = $('.clue_info')[0];
+  clue.innerHTML = "";
+  clue.innerHTML = teamData.location_info.clue;
+
+  var name = $('.team_name_clue_page')[0];
+  name.innerHTML = "";
+  name.innerHTML = teamData.team_info.name;
+
+  $('.clue').toggle();
+
+  hideClueViewOnClick();
+};
+
+
+function hideClueViewOnClick() {
+  $("#send_picture").on("click", function() {
+    $('.clue').toggle();
+  });
+}
+;
+function updateAccept(){
+  var slug = getSlug();
+
+  $.ajax({
+    url: "/update_accept",
+    data: { 
+        "slug": slug
+    },
+    type: "PUT",
+    success: function(response) {
+      setView();
+    },
+    error: function(xhr) {
+      console.log("no data error update team");
+    }
+  });
+
+};
+
+
+function tryAgain(){
+  $('#failure_response_button').on('click', function(){
+    updateAccept();
+  });
+};
+
+function nextClue(){
+  $('#success_response_button').on('click', function(){
+    updateAccept();
+  });
+};
+
+function setResponseView(isClueCorrect, currentTeamData){
+  var slug = getSlug();
+  tryAgain();
+  nextClue();
+
+  $.ajax({
+    url: "/next_location/"+slug,
+    data: { 
+        "slug": slug,
+        "team": { "correct": isClueCorrect }
+    },
+    type: "PUT",
+    success: function(response) {
+      isClueCorrect ? $('.success_response').toggle() : $('.failure_response').toggle()
+      $('.submission_response').toggle();
+    },
+    error: function(xhr) {
+      console.log("no data error set View");
+    }
+  });
+  
+};
 function teamViewsController(){
-  window.teamData = 'no data window';
+  window.teamData = "data placeholder";
   setView();
   setInterval(setView, 5000);
 };
@@ -18162,13 +18236,11 @@ function setView() {
     },
     type: "GET",
     success: function(response) {
-      console.log(response);
-      console.log(teamData);
       if(!(_.isEqual(response, teamData))){
-        resetTeamView();
+        resetAllViews();
         toggleViews(response);  
       };
-      teamData = _.clone(response);
+      teamData = jQuery.extend(true, {}, response);
     },
     error: function(xhr) {
       console.log("no data error set View");
@@ -18178,28 +18250,27 @@ function setView() {
 };
 
 function toggleViews(currentTeamData){
+  var submission = currentTeamData.submission_info; 
+
   if(currentTeamData.team_info.hunt_initiated === false){
     $('.team_welcome').toggle();
-  } else if(currentTeamData.submission_info.responded_to === false){
+  } else if(submission.responded_to && submission.accepted){
+    setClueView(currentTeamData);
+  } else if(!submission.responded_to && !submission.accepted){
     $('.waiting').toggle();
+  } else if(submission.responded_to && !submission.accepted){
+    setResponseView(submission.correct, currentTeamData);
   } else {
-    $('.clue').toggle();
-  }
+    console.log('unregistered team client state');
+  };
 };
 
-function resetTeamView(){
-  var welcomeView = $('.team_welcome'); 
-  var clueView    = $('.team_welcome');
-  var waitingView = $('.waiting');
-
-  if(!welcomeView.is(':hidden')){
-    welcomeView.toggle();
-  } else if(!clueView.is(':hidden')) {
-    clueView.toggle();
-  } else if(!waitingView.is(':hidden')){
-    waitingView.toggle();
-  } else {
-  };
+function resetAllViews(){
+  var views = [$('.team_welcome'), $('.team_welcome'), $('.waiting'), $('.submission_response'), $('.success_response'), $('.failure_response')];
+  
+  views.forEach(function(view){
+    if(!view.is(':hidden')){ view.toggle() };
+  });
 };
 
 function getSlug(){

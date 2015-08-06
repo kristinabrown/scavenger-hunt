@@ -1,5 +1,6 @@
 function teamViewsController(){
-  window.teamData = "data placeholder";
+  window.teamData    = "initialize";
+  window.checkStatus = false; 
   setView();
   setInterval(setView, 5000);
 };
@@ -14,7 +15,8 @@ function setView() {
     },
     type: "GET",
     success: function(response) {
-      if(!(_.isEqual(response, teamData))){
+      shouldItChangeViews = compareResponseForChanges(response, teamData); 
+      if(shouldItChangeViews){
         resetAllViews();
         toggleViews(response);  
       };
@@ -24,12 +26,10 @@ function setView() {
       console.log("no data error set View");
     }
   });
-
 };
 
 function toggleViews(currentTeamData){
   var submission = currentTeamData.submission_info; 
-
   if(currentTeamData.team_info.hunt_initiated === false){
     $('.team_welcome').toggle();
   } else if(submission.responded_to && submission.accepted){
@@ -37,6 +37,7 @@ function toggleViews(currentTeamData){
   } else if(!submission.responded_to && !submission.accepted){
     $('.waiting').toggle();
   } else if(submission.responded_to && !submission.accepted){
+    console.log('hitting response view!!!');
     setResponseView(submission.correct, currentTeamData);
   } else {
     console.log('unregistered team client state');
@@ -55,3 +56,11 @@ function getSlug(){
   var slug = _.last(document.URL.split('/')); 
   return slug;
 }
+
+function compareResponseForChanges(newData, oldData){
+  if(oldData === "initialize"){ return true };
+  var newDataMash = newData.team_info.hunt_initiated +":"+ newData.submission_info.responded_to +":"+ newData.submission_info.accepted;
+  var oldDataMash = oldData.team_info.hunt_initiated +":"+ oldData.submission_info.responded_to +":"+ oldData.submission_info.accepted;
+  var areNewDataAndOldDataTheSame = _.isEqual(newDataMash, oldDataMash);
+  return !areNewDataAndOldDataTheSame;
+};
