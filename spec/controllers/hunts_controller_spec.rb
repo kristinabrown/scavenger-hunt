@@ -8,6 +8,10 @@ RSpec.describe HuntsController, type: :controller do
   let!(:location_2) { create(:location_2) }
   let!(:location_3) { create(:location_3) }
   let!(:location_4) { create(:location_4) }
+
+  # let!(:team1)  { create(:team, hunt_id: hunt.id) }
+  # let!(:team2)  { create(:team_2, hunt_id: hunt.id) }
+  # let!(:team3)  { create(:team_3, hunt_id: hunt.id) }
  
   def create_teams
     3.times do |i|
@@ -31,13 +35,13 @@ RSpec.describe HuntsController, type: :controller do
     it "ends a hunt" do
       id = hunt.id
       expect(Hunt.first.active).to be(true)
-      delete :destroy, format: :json, id: id
+      delete :destroy, format: :json
       expect(Hunt.first.active).to be(false)
     end
   end
 
   describe "GET#index" do
-    it "returns the data for the current hunt" do
+    xit "returns the data for the current hunt" do
       create_teams
       [0,1,2].each { |n| hunt.teams << Team.all[n] }
       get :index, format: :json
