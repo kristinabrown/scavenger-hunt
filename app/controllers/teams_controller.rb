@@ -4,7 +4,10 @@ class TeamsController < ApplicationController
   respond_to :json
 
   def create
-    respond_with Team.create(team_params), location: nil
+    team = Team.create(team_params)
+    Twillio.new.send(team.phone_number)
+    respond_with team, location: nil
+
   end
 
   def update

@@ -16,6 +16,7 @@ gem 'responders'
 gem 'underscore-rails'
 gem 'awesome_print'
 gem 'faker'
+gem 'twilio-ruby'
 # gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
 
