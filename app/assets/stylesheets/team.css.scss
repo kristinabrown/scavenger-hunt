@@ -1,6 +1,3 @@
-.waiting {
-  margin-top: 50%;
-}
 
 // ------------welcome page---------
 
@@ -67,10 +64,48 @@
   font-size: 1.5em;
 }
 
+// -----------response page -------------
 
+#success_response_button {
+  min-width: 350px;
+  min-height: 180px;
+  font-size: 3.5em;
+}
 
+#failure_response_button {
+  min-width: 350px;
+  min-height: 180px;
+  font-size: 3.5em;
+}
 
-@media screen and (max-width: 600px) {
-  
-  
+// ------------spinner-------------
+
+.waiting {
+  margin-top: 50%;
+}
+
+#turing_spinner {
+  width: 500px;
+}
+
+// ----------------nacho screen ----------------------
+
+#nacho-header {
+  margin-bottom: 80px;
+  background-color: rgb(185, 20, 89);
+  color: white;
+  padding: 40px;
+  font-size: 100px;
+}
+
+.nacho-p {
+  // background-color: rgb(34, 178, 198);
+  color: rgb(20, 191, 109);
+  padding: 7px;
+}
+
+#nacho-gif {
+  margin-top: 200px;
+  margin-left: 0px;
+  width: 100%;
 }

@@ -51,8 +51,9 @@
   </div>
 
   <div class="waiting center hidden">
-    <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue-only">
+    <!-- <div class="preloader-wrapper big active"> -->
+    <%= image_tag("Turing_spinner.gif", id: "turing_spinner") %>
+      <!-- <div class="spinner-layer spinner-blue-only">
         <div class="circle-clipper left">
           <div class="circle"></div>
         </div><div class="gap-patch">
@@ -60,20 +61,30 @@
         </div><div class="circle-clipper right">
           <div class="circle"></div>
         </div>
-      </div>
-    </div>
-    <p>waiting...</p>
+      </div> -->
+    <!-- </div> -->
+    <p class="mobile-font-clue">waiting...</p>
   </div>
 
   <!-- submission response -->
   <div class="submission_response hidden">
     <div class='success_response hidden'>
-      <p id='success_response_message'>Correct! Go on to the next location.</p>
-      <button class="btn waves-effect waves-light" id="success_response_button" type="submit">Next Clue</button>
+      <p id='success_response_message' class="mobile-font-clue">Correct! Go on to the next location.</p>
+      <button class="btn waves-effect waves-light center-align" id="success_response_button" type="submit">Next Clue</button>
     </div>
     <div class='failure_response hidden'>
-      <p id='failure_response_message'>Not quite right, try again!</p>
+      <p id='failure_response_message' class="mobile-font-clue">Not quite right, try again!</p>
       <button class="btn waves-effect waves-light" id="failure_response_button" type="submit">Try Again</button>
     </div>
   </div>
+
+
+<!-- nacho screen -->
+
+  <div class="winning-condition hidden">
+    <h1 class="center" id="nacho-header"> HEY! </h1>
+    <p class="mobile-font-clue"> The Hunt is over. You all did a great job. Now <strong>get back to Turing</strong> and let's <strong class="nacho-p">eat nachos!</strong></p>
+    <%= image_tag("adventuretime-nachos.gif", id: "nacho-gif") %>
+  </div>
+  
 </div>
