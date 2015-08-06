@@ -7,6 +7,7 @@ class Seed
   def self.production
     generate_locations
     generate_admin
+    Hunt.create(name: 'seeds initialize hunt', number_of_teams: 0, active: false)
   end
 
   def self.development
