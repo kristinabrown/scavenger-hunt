@@ -15,8 +15,6 @@ function gatherCurrentHuntData(){
 };
 
 function renderCorrectTemplate(currentHuntData){
-  console.log("win")
-
 
   if(currentHuntData.active && currentHuntData.teams.length > 0){
     showAdminDashboardPage(currentHuntData);
