@@ -5,9 +5,8 @@ class TeamsController < ApplicationController
 
   def create
     team = Team.create(team_params)
-    Twillio.new.send(team.phone_number)
+    Messenger.new.send(team.phone_number)
     respond_with team, location: nil
-
   end
 
   def update
