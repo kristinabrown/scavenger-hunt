@@ -6,13 +6,14 @@ class SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:id])
     @submission.update(correct: params[:submission][:correct], responded_to: params[:submission][:responded_to] )
+    $redis.publish('update', 'something has changed')
     respond_with @submission, location: nil
   end
 
   def create
     @team = Team.find(params[:team_id])
     if Submission.create(attachment: params[:attachment], team_id: params[:team_id], location_id: params[:location_id])
-      flash[:notice] = "Submitted!"
+      $redis.publish('update', 'something has changed')
       redirect_to team_path(@team)
     else
       flash[:errors] = "Something went terribly wrong."
@@ -30,7 +31,9 @@ class SubmissionsController < ApplicationController
   end
 
   def update_accept
-    respond_with Team.find_by!(slug: params[:slug]).submissions.last.update(accepted: true)
+    accept = Team.find_by!(slug: params[:slug]).submissions.last.update(accepted: true)
+    $redis.publish('update', 'something has changed')
+    respond_with accept
   end
   
   private

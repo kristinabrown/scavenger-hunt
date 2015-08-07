@@ -19,6 +19,9 @@ gem 'faker'
 gem 'twilio-ruby'
 # gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
+gem 'unicorn'
+gem 'redis'
+gem 'socket.io-rails'
 
 group :production do
   gem 'rails_12factor'
