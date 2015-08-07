@@ -234,6 +234,8 @@ GEM
       rdoc (~> 4.0)
     shellany (0.0.1)
     slop (3.6.0)
+    socket.io-rails (1.3.6)
+      railties (>= 3.1)
     spring (1.3.6)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -302,6 +304,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  socket.io-rails
   spring
   teaspoon
   teaspoon-mocha
