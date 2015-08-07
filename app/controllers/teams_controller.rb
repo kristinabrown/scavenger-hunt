@@ -10,8 +10,9 @@ class TeamsController < ApplicationController
   end
 
   def update
-    team = Team.find_by!(slug: params[:slug])
-    respond_with team.update(team_params), location: nil
+    team = Team.find_by!(slug: params[:slug]).update(team_params)
+    $redis.publish('update', 'something has changed')
+    respond_with team, location: nil
   end
 
   def index
