@@ -13,4 +13,5 @@
 //= require jquery
 //= require underscore
 //= require materialize-sprockets
+//= require socket.io
 //= require_tree .
