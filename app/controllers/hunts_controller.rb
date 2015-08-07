@@ -12,7 +12,9 @@ class HuntsController < ApplicationController
   end
 
   def destroy
-    respond_with Hunt.end_game(Hunt.last.id), location: nil
+    end_game = Hunt.end_game(Hunt.last.id)
+    $redis.publish('update', 'something has changed')
+    respond_with end_game, location: nil
   end
 
   private
