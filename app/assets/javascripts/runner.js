@@ -6,6 +6,8 @@ $(document).ready(function() {
 
   teamViewsController();
   teamWelcomeView();
+
+  connectToRedis();
   
   setTimeout(function(){ 
     $('#flash_errors').remove(); 

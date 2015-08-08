@@ -8,11 +8,15 @@ class HuntsController < ApplicationController
   end
 
   def create
-    respond_with Hunt.create(hunt_params), location: nil
+    hunt = Hunt.create(hunt_params)
+    $redis.publish('update', 'something has changed')
+    respond_with hunt, location: nil
   end
 
   def destroy
-    respond_with Hunt.end_game(Hunt.last.id), location: nil
+    end_game = Hunt.end_game(Hunt.last.id)
+    $redis.publish('update', 'something has changed')
+    respond_with end_game, location: nil
   end
 
   private
