@@ -1,5 +1,5 @@
 function connectToRedis(){
-  var socket = io.connect('http://localhost:3001/');
+  var socket = io.connect('https://scavenger-hunt-node.herokuapp.com/');
 
   socket.on('message', function(){
     setView();
