@@ -37,9 +37,7 @@ class Team < ActiveRecord::Base
 
   def set_route
     taken_routes = Hunt.last.teams.map {|team| team.route}
-    p taken_routes
     team_route = (1..7).to_a.sample
-    p team_route
     if taken_routes.include?(team_route)
       set_route
     else
@@ -74,8 +72,8 @@ class Team < ActiveRecord::Base
   end
 
   def set_next_location
-    new_id = hunt_routes[self.route][self.found_locations]
     new_found = self.found_locations + 1
+    new_id = hunt_routes[self.route][new_found]
     self.update(location_id: new_id, found_locations: new_found)
     check_to_see_if_the_hunt_is_over
   end
