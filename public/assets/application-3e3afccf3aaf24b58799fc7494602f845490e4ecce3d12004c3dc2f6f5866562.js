@@ -25169,6 +25169,7 @@ $(document).ready(function() {
 
   teamViewsController();
   teamWelcomeView();
+  takePicture()
 
   connectToRedis();
   
@@ -25180,6 +25181,19 @@ $(document).ready(function() {
     $('#flash_notice').remove(); 
   }, 3000);
 });
+function takePicture(){
+  
+  $('#take_picture').on('click', function(){
+    $('#camera').trigger( "click" );
+    $('#send_picture')[0].style.display = "block";
+    $('#take_picture')[0].style.display = "none";
+  });
+
+  $('#send_picture').on('click', function(){
+    $('#take_picture')[0].style.display = "block";
+    $('#send_picture')[0].style.display = "none";
+  });
+};
 function setClueView(teamData){
   var clue = $('.clue_info')[0];
   clue.innerHTML = "";
