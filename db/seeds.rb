@@ -20,7 +20,7 @@ class Seed
 
   def self.generate_admin
     p "admin created"
-    Admin.create!(name: "Raissa", phone: "555-555-5555", password: "password")
+    Admin.create!(name: "Andrew", phone: "555-555-5555", password: "password")
   end
 
   def self.generate_last_team(hunt_id)
