@@ -25085,7 +25085,7 @@ function activateHunt() {
 function adminViewController(){
   window.adminData = 'no adminData window';
   gatherCurrentHuntData();
-  setInterval(gatherCurrentHuntData, 60000);
+  setInterval(gatherCurrentHuntData, 20000);
 }
 
 function gatherCurrentHuntData(){
@@ -25274,7 +25274,7 @@ function teamViewsController(){
   window.teamData    = "initialize";
   window.checkStatus = false; 
   setView();
-  setInterval(setView, 60000);
+  setInterval(setView, 20000);
 };
 
 function setView() {
