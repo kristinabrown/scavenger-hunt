@@ -23,6 +23,15 @@ class TeamsController < ApplicationController
     @team = Team.find_by(slug: params[:id])
   end
 
+  def find
+  end
+
+  def team_finder
+    team = Team.find_by(slug: params[:teams][:slug])
+
+    redirect_to team
+  end
+
   def team_data
     respond_with Team.find_by!(slug: params[:slug]).data, location: nil
   end

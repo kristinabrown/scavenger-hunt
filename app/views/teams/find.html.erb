@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Enter Your Team's Phone Number to Find Your Team Page</h1>
+  <%= form_for :teams, url: "/find_team" do |f| %>
+  <%= f.label :slug, "Phone Number" %>
+  <%= f.text_field :slug, placeholder: "15554443333" %>
+  <%= f.submit "Find Team", class: "btn btn-large" %>
+  <% end %>
+</div>

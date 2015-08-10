@@ -1,4 +1,4 @@
-class Messenger
+class Messenger   
 
   attr_reader :client
 
