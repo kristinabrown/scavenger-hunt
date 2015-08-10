@@ -39,6 +39,7 @@
     <h3 class="team_name_clue_page center"></h3>
     <h3 id="clue-header">Clue:</h3>
     <p class="clue_info mobile-font-clue"></p>
+    <button id="take_picture">Take Picture</button>
     <%= form_tag("/submissions", multipart: true) do %>
       <%= file_field_tag :attachment, {capture: "camera", accept: "image/*", id: "camera"}%>
       <%= hidden_field_tag :team_id, @team.id %>
