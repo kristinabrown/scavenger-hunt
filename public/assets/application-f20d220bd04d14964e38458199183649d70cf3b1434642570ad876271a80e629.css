@@ -69,6 +69,11 @@
   background-color: #0d740a;
   color: white;
 }
+
+/* line 62, /Users/kristinabrown/turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/admin.css.scss */
+#landing-spinner {
+  width: 200px;
+}
 /* line 4, /Users/kristinabrown/turing/mod4/scavenger-hunt/scavenger-hunt/app/assets/stylesheets/team.css.scss */
 .mobile-font {
   font-size: 16px;
