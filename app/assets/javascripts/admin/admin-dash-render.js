@@ -1,7 +1,7 @@
 function adminViewController(){
   window.adminData = 'no adminData window';
   gatherCurrentHuntData();
-  setInterval(gatherCurrentHuntData, 20000);
+  setInterval(gatherCurrentHuntData, 5000);
 }
 
 function gatherCurrentHuntData(){

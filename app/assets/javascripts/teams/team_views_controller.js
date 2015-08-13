@@ -2,7 +2,7 @@ function teamViewsController(){
   window.teamData    = "initialize";
   window.checkStatus = false; 
   setView();
-  setInterval(setView, 20000);
+  setInterval(setView, 5000);
 };
 
 function setView() {
