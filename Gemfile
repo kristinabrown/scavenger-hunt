@@ -40,4 +40,5 @@ group :development, :test do
   gem 'teaspoon'
   gem 'teaspoon-mocha'
   gem 'better_errors'
+  gem 'phantomjs'
 end

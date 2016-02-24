@@ -156,6 +156,7 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.2)
+    phantomjs (2.1.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -296,6 +297,7 @@ DEPENDENCIES
   materialize-sass
   paperclip (~> 4.3)
   pg
+  phantomjs
   pry
   rails (= 4.2.3)
   rails_12factor
@@ -313,3 +315,6 @@ DEPENDENCIES
   underscore-rails
   unicorn
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2
